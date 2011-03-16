@@ -17,14 +17,15 @@ require_once(dirname(dirname(__FILE__)) . '/inc/class/DAL.php');
 
     $dal=new DAL();
 
-$db = Zend_Db::factory('Mysqli', array(
+    require_once 'model.php';
+/*$db = Zend_Db::factory('Mysqli', array(
 	//'host'     => '127.0.0.1',
         'host'     => 'localhost',
 	'username' => 'root',
 	'password' => 'pass',
 	'dbname'   => 'intranet'
 	));
-
+*/
 
 
 $auth = Zend_Auth::getInstance(); 

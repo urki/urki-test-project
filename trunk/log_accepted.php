@@ -1,0 +1,15 @@
+<?
+
+require_once("inc/config.php");
+//Role id protection//
+check_role($ROLE_USER);
+
+//echo "ce mi izpise:".$message;
+$tem = str_replace('##MESSAGE##',$message,$tem);
+$tem = template_open("log_accepted.tpl");
+$tem = template_add_head_foot($tem,head,foot);
+$tem = str_replace('##USER##',$identity,$tem);
+$tem = template_clean_up_tags($tem,"##");
+echo $tem;
+
+?>

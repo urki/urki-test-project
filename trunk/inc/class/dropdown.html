@@ -1,0 +1,73 @@
+
+
+
+<FORM name="isc">
+<select name="example" size="1" onChange="redirect(this.options.selectedIndex)">
+<option selected>---Select1-------------</option>
+<option>RIM</option>
+
+<select name="stage2" size="1" onChange="redirect1(this.options.selectedIndex)">
+<option value=" " selected> </option>
+<option value=" " selected>---Select2--------------</option>
+<option value=" " selected>---Select2--------------</option>
+</select>
+
+<select name="stage3" size="1" onChange="redirect2(this.options.selectedIndex)">
+<option value=" "> </option>
+<option value=" ">---Select3----------------</option>
+<option value=" " selected>---Select3----------------</option>
+</select>
+<script>
+<!--
+
+var groups=document.isc.example.options.length
+var group=new Array(groups)
+for (i=0; i<groups; i++)
+group[i]=new Array()
+
+group[0][0]=new Option("---Select2---"," ");
+
+group[1][0]=new Option("Now Select This One"," ");
+group[1][1]=new Option("RIM Blackberry - IDEN","47");
+
+var temp=document.isc.stage2
+
+
+function redirect(x){
+for (m=temp.options.length-1;m>0;m--)
+temp.options[m]=null
+for (i=0;i<group[x].length;i++){
+temp.options[i]=new Option(group[x][i].text,group[x][i].value)
+}
+temp.options[0].selected=true
+redirect1(0)
+}
+
+var secondGroups=document.isc.stage2.options.length
+var secondGroup=new Array(groups)
+for (i=0; i<groups; i++)  {
+secondGroup[i]=new Array(group[i].length)
+for (j=0; j<group[i].length; j++)  {
+secondGroup[i][j]=new Array()  }}
+
+secondGroup[0][0][0]=new Option("---Select 3---"," ");
+secondGroup[1][0][0]=new Option("---Select 3---"," ");
+secondGroup[1][1][0]=new Option("Now Select This One"," ");
+secondGroup[1][1][1]=new Option("Activation / Provisioning");
+secondGroup[1][1][1].onchange = "javascript:window.open('http://web/services/activate.html')";
+
+var temp1=document.isc.stage3
+function redirect1(y){
+for (m=temp1.options.length-1;m>0;m--)
+temp1.options[m]=null
+for (i=0;i<secondGroup[document.isc.example.options.selectedIndex][y].length;i++){
+temp1.options[i]=new Option(secondGroup[document.isc.example.options.selectedIndex][y][i].text,secondGroup[document.isc.example.options.selectedIndex][y][i].value)
+}
+temp1.options[0].selected=true
+}
+
+function redirect2(z){
+window.location=temp1[z].value
+}
+</script>
+</form>

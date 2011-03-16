@@ -1,0 +1,66 @@
+<style type="text/css">
+<!--
+.style2 {font-size: x-small}
+.style4 {font-size: x-small; font-weight: bold; }
+.style6 {font-size: x-small; font-weight: bold; color: #999999; }
+.style7 {font-size: x-small; font-weight: bold; color: #FFFED2; }
+-->
+
+</style>
+
+<form action="add_work_emplo.php" method="post" accept-charset="utf-8">
+  <table width="748" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td colspan="3" bgcolor="#FEFCAB"><strong>Aktivnosti zaposlenih:</strong></td>
+      <td colspan="9" bgcolor="#FEFCAB">&nbsp;</td>
+    </tr>
+   <tr>
+      <td height="2" width="131"  bgcolor="#FEFCAB"><span class="style6"></span></td>
+      <td height="2" width="4"    bgcolor="#FEFCAB">&nbsp;</td>
+      <td height="2" width="163"  bgcolor="#FEFCAB"><span class="style6"></span></td>
+
+  <td height="4" width="4"    bgcolor="#FEFCAB" colspan="2"><span class="style6">&#269;as za&#269;etka:</span></td>
+      <td height="4" bgcolor="#FEFCAB"><span class="style7">hur</span></td> <!--vmesna kolona za boljši pregled  stop cas-->
+      <td height="4" width="4"    bgcolor="#FEFCAB" colspan="2"><span class="style6">&#269;as konca:</span></td>
+      <td height="4" bgcolor="#FEFCAB"><span class="style7">hmi</span></td> <!--vmesna kolona za boljši pregled  stop cas-->
+      <td height="4"  bgcolor="#FEFCAB"><span class="style7"></span></td> <!--vmesna kolona za boljši pregled  stop cas-->
+      <td height="2"              bgcolor="#FEFCAB">&nbsp;</td>
+      <td height="2"              bgcolor="#FEFCAB"><span class="style6"></span></td>
+      <td height="2"              bgcolor="#FEFCAB"><span class="style6"></span></td>
+    </tr>
+    <tr>
+      <td height="4" width="131"  bgcolor="#FEFCAB"><span class="style6">Aktivnost:</span></td>
+      <td            width="4"    bgcolor="#FEFCAB">&nbsp;</td>
+      <td height="4" width="163"  bgcolor="#FEFCAB"><span class="style6">Lokacija:</span></td>
+      <td height="2"  align="center" width="4"    bgcolor="#FEFCAB"><span class="style6">ur:</span></td>
+      <td height="2"  align="center" width="4"    bgcolor="#FEFCAB"><span class="style6">minut:</span></td>
+      <td height="4"  bgcolor="#FEFCAB"><span class="style7"></span></td> <!--vmesna kolona za boljši pregled  stop cas-->
+      <td height="2" align="center" width="4"    bgcolor="#FEFCAB"><span class="style6">ur:</span></td>
+      <td height="2"  align="center" width="4"    bgcolor="#FEFCAB"><span class="style6">minut:</span></td>
+     <td height="4"  bgcolor="#FEFCAB"><span class="style7"></span></td> <!--vmesna kolona za boljši pregled  stop cas-->
+      <td height="4" bgcolor="#FEFCAB"><span class="style6">opomba:</span></td>
+      <td height="4" bgcolor="#FEFCAB"><span class="style7">hm</span></td><!--vmesna kolona za boljši pregled  stop cas-->
+    </tr>
+ 
+    <tr>
+      <td bgcolor="#FEFCAB"><span class="text">##WORK_DROP##</span></td>
+      <td bgcolor="#FEFCAB">&nbsp;</td>
+      <td bgcolor="#FEFCAB"><span class="text">##LOCATION_DROP##</span>
+      <td width="87" bgcolor="#FEFCAB">##STARTTIMEHOUR##</td>
+      <td width="87" bgcolor="#FEFCAB">##STARTTIMEMIN##</td>
+      <td height="4" bgcolor="#FEFCAB"><span class="style7"></span></td> <!--vmesna kolona za boljši pregled  stop cas-->
+      <td width="87" bgcolor="#FEFCAB">##STOPTIMEHOUR##</td>
+      <td width="87" bgcolor="#FEFCAB">##STOPTIMEMIN##</td>
+      <td height="4" bgcolor="#FEFCAB"><span class="style7"></span></td> <!--vmesna kolona za boljši pregled  stop cas-->
+      <td bgcolor="#FEFCAB"><span class="text"><textarea name="note" id="note" cols="10" rows="1"></textarea></span></td>
+      <td bgcolor="#FEFCAB"><span class="text">
+        <input type="submit" name="add" id="add" value="    Shrani    " />##MESSAGE## </span></td>
+    </tr>
+    <tr>
+      <td height="1" colspan="15" bgcolor="#FEFCAB">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="15" bgcolor="#FEFCAB">&nbsp;</td>
+    </tr>
+  </table>
+</form>

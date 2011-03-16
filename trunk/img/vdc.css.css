@@ -1,0 +1,103 @@
+/* 
+    Document   : vdc.css
+    Created on : 21.1.2011, 19:22:42
+    Author     : uros
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+textarea {
+
+border:1px solid #5c616a;
+height:100px;
+}
+
+root { 
+    display: block;
+}
+
+
+.main {
+    opacity:0.4;filter:alpha(opacity=40);
+    background: red;
+}
+
+
+#aimadd{
+    padding-top: 25em;
+}
+.htmltextarea{
+    width: 10em;
+    height: 1em;
+}
+.ozadje{
+      color:#050;
+	  font: bold small 'trebuchet ms',helvetica,sans-serif;
+          background-color: #9AFDA7;
+}
+
+#nid {
+    width: 3em;
+    border: 0;
+
+}
+
+#stopactivitytekst {
+    height: 3em;
+    width: 28em;
+}
+#activity1add {
+    padding-top: 3em;
+}
+
+#pagetitle {
+    padding-top: 2em;
+    color: #8A4C3B;
+    font-weight:  bold;
+}
+
+#headmessage {
+    color: red
+
+}
+
+
+#addlogadmin {
+    color: red;
+
+
+}
+.red {
+    color: #8A4C3B;
+    
+}
+
+
+
+
+.shadowcontainer {
+    display: table-cell;
+    vertical-align: middle;
+    color: rgba(0, 0, 0, 1.00);
+    background-color: rgba(0,0,0,0);
+    -webkit-box-shadow: 2px 6px 30px rgba(0, 0, 0, 0.15) ;
+    -o-box-shadow: 2px 6px 30px rgba(0, 0, 0, 0.15) ;
+    -moz-box-shadow: 2px 6px 30px rgba(0, 0, 0, 0.15) ;
+    box-shadow: 2px 6px 30px rgba(0, 0, 0, 0.15) ;
+}
+
+h1 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.60);
+    background-color: transparent;
+}
+
+
+insert:link {color:#FF0000;}      /* unvisited link */
+insert:visited {color:#00FF00;}  /* visited link */
+insert:hover {color:#FF00FF;}  /* mouse over link */
+insert:active {color:#0000FF;}  /* selected link */

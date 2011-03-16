@@ -1,0 +1,369 @@
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<title>ocenjevanje</title>
+
+<style type="text/css">
+<!--
+.style2 {font-size: x-small}
+.style4 {font-size: x-small; font-weight: bold; }
+.style6 {position:none;top:0px;text-align:left;width:20px;font-size: x-small; font-weight: bold; color: #999999; }
+-->
+</style>
+<body  bgcolor="#FFFED2"> 
+
+
+
+<form action="aktivnosti.php?tp=head" method="post" accept-charset="utf-8">
+ <strong>Aktivnosti uporabnikov:</strong>
+
+  <table width="1186" border="0" cellpadding="0" cellspacing="0" bordercolor="#FFFF66">
+
+    
+    <tr>
+      <td width="87" bgcolor="#FFFED2"><label class="style6" for="uporabnik">uporabnik</label>##NAMES##</td>
+
+##IF_ADMIN##
+      <td width="87" bgcolor="#FFFED2"><label class="style6" for="ocenjevalec">uporabnik</label>##ASSNAMES##</td>
+      <td width="87" bgcolor="#FFFED2"><label class="style6" for="dan">dan</label>##DAY##</td>
+      <td width="87" bgcolor="#FFFED2"><label class="style6" for="mesec">mesec</label>##MONTH##</td>
+      <td width="87" bgcolor="#FFFED2"><label class="style6" for="leto">leto</label>##YEAR##</td>
+##IF_ADMIN##
+
+      <td width="81" bgcolor="#FFFED2">
+          <span class="text"><label class="style6" for="delo">delo</label>##WORK##</span></td>
+      <td width="9" bgcolor="#FFFED2">&nbsp;</td>
+      <td width="1" bgcolor="#FFFED2"></td>
+
+ <td width="87" bgcolor="#FFFED2"><label class="style6" for="z.ur"> z.ur  </label>##STARTTIMEHOUR##</td>
+ <td width="87" bgcolor="#FFFED2"><label class="style6" for="z.min"> z.min </label>##STARTTIMEMIN##</td>
+ <td width="87" bgcolor="#FFFED2"><label class="style6" for="'st.ur'"> st.ur  </label>##STOPTIMEHOUR##</td>
+ <td width="87" bgcolor="#FFFED2"><label class="style6" for="'st.min'"> st.min  </label>##STOPTIMEMIN##</td>
+ <td width="87" bgcolor="#FFFED2"><label class="style6" for="'p.ur'"> p.ur </label>##PAUSEHOURTIME##</td>
+ <td width="87" bgcolor="#FFFED2"><label class="style6" for="'p.min'"> p.min </label>##PAUSEMINTIME##</td>
+ <td width="87" bgcolor="#FFFED2"><label class="style6" for="'ocena'"> ocena </label>##RATING##</td>
+
+  
+
+     <!--  <select name="HOUR_START">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option selected="selected" value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+        </select>
+    
+ </span></td>
+  <td width="52" bgcolor="#FFFED2"><span class="text">
+-->
+<!--
+
+ <select name="MIN_START">
+
+         <option value="0">00</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+          <option value="46">46</option>
+          <option value="47">47</option>
+          <option value="48">48</option>
+          <option value="49">49</option>
+          <option value="50">50</option>
+          <option value="51">51</option>
+          <option value="52">52</option>
+          <option value="53">53</option>
+          <option value="54">54</option>
+          <option value="55">55</option>
+          <option value="56">56</option>
+          <option value="57">57</option>
+          <option value="58">58</option>
+          <option value="59">59</option>
+        </select>
+   -->
+   </span></td>
+      <td width="4" bgcolor="#FFFED2">&nbsp;</td>
+    <td width="52" bgcolor="#FFFED2"><span class="text">
+
+<!--
+
+<select name="HOUR_STOP">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option selected="selected" value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+        </select>
+      </span></td>
+<td width="52" bgcolor="#FFFED2"><span class="text">
+  <select name="MIN_STOP">
+          <option value="0">00</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option selected="selected" value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+          <option value="46">46</option>
+          <option value="47">47</option>
+          <option value="48">48</option>
+          <option value="49">49</option>
+          <option value="50">50</option>
+          <option value="51">51</option>
+          <option value="52">52</option>
+          <option value="53">53</option>
+          <option value="54">54</option>
+          <option value="55">55</option>
+          <option value="56">56</option>
+          <option value="57">57</option>
+          <option value="58">58</option>
+          <option value="59">59</option>
+        </select>
+      </span></td>
+      <td width="6" bgcolor="#FFFED2">&nbsp;</td>
+      <td width="52" bgcolor="#FFFED2"><span class="text">
+  <select name="PAUSEHOUR">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+        </select>
+      </span></td>
+  <td width="52" bgcolor="#FFFED2"><span class="text">
+  <select name="PAUSEMIN">
+          <option value="0">00</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+          <option value="46">46</option>
+          <option value="47">47</option>
+          <option value="48">48</option>
+          <option value="49">49</option>
+          <option value="50">50</option>
+          <option value="51">51</option>
+          <option value="52">52</option>
+          <option value="53">53</option>
+          <option value="54">54</option>
+          <option value="55">55</option>
+          <option value="56">56</option>
+          <option value="57">57</option>
+          <option value="58">58</option>
+          <option value="59">59</option>
+        </select>
+      </span></td>
+ 
+
+    <td width="106" bgcolor="#FFFED2"><div align="center">
+        <select name="assessment">
+          <option value="1">1
+          <option value="2">2
+          <option selected value="3">3
+          <option value="4">4
+          <option value="5">5
+        </select>
+
+      </div></td>
+ -->
+  <td width="86" bgcolor="#FFFED2"><span class="text">
+      <textarea name="note" id="note" cols="10" rows="1"></textarea>
+      </span></td>
+      <td width="294" bgcolor="#FFFED2"><span class="text">
+      <input type="submit" name="add" id="add" value="    Shrani    " />##MESSAGE##
+      </span> </td>
+    </tr>
+  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,210 @@
+/* 
+    Document   : old.css
+    Created on : 21.1.2011, 11:43:17
+    Author     : uros
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+a.top, a.topIconHelp, a.topIconExit {
+color:blue;
+font-family: tahoma;
+	font-size: 55%;
+}
+
+a.topIconHelp {
+cursor:w-help;
+}
+a.topIconExit {
+cursor:w-resize;
+}
+a.bottom {
+}
+
+
+A:link, A:visited, A:active, A:hover ,a.top, a.topIconHelp, a.topIconExit {
+text-decoration:underline
+}
+
+A:hover, a.top, a.bottom, input.btn:hover, a.top, a.topIconHelp, a.topIconExit {font-weight:bold; text-decoration:underline; color: blue;}
+
+input:hover {
+color: blue;
+}
+
+body{
+margin:0;
+padding:0;
+line-height: 1.5em;
+}
+
+b{font-size: 110%;}
+em{color: red;}
+
+
+#topsection{
+background: #EAEAEA;
+height: 90px; /*Height of top section*/
+}
+
+#topsection h1{
+margin: 0;
+padding-top: 15px;
+}
+
+#contentwrapper{
+float: left;
+width: 100%;
+}
+
+#contentcolumn{
+margin: 0 15% 0 20%; /*Margins for content column. Should be "0 RightColumnWidth 0 LeftColumnWidth*/
+}
+
+#leftcolumn{
+float: left;
+width: 20%; /*Width of left column in percentage*/
+margin-left: -100%;
+background: #C8FC98;
+}
+
+#rightcolumn{
+float: left;
+width: 15%; /*Width of right column in pixels*/
+margin-left: -15%; /*Set margin to that of -(RightColumnWidth)*/
+background: #FDE95E;
+}
+
+#footer{
+clear: left;
+width: 100%;
+background: black;
+color: #FFF;
+text-align: center;
+padding: 4px 0;
+}
+
+#footer a{
+color: #FFFF80;
+}
+
+.innertube{
+margin: 10px; /*Margins for inner DIV inside each column (to provide padding)*/
+margin-top: 0;
+}
+
+
+
+
+
+
+.hlink{cursor:help;}
+.wresize{cursor:w-resize;}
+
+
+
+input.btn {
+	  color:#050;
+	  font: bold small 'trebuchet ms',helvetica,sans-serif;
+          background-color: #9AFDA7;
+	}
+
+.dropdown_green, .dropdown_red, textbox_green, textbox_red {
+font-family: arial, verdana, ms sans serif;
+font-size: 12pt;
+border:2;
+}
+
+.dropdown_green {
+background-color: #9AFDA7;
+color: #999999;
+}
+
+.dropdown_red {
+background-color: #FD9A9A;
+color: #999999;
+}
+
+.textbox_green {
+background-color: #9AFDA7;
+color: #999999;
+}
+
+.textbox_red {
+background-color: #FD9A9A;
+color: #999999;
+}
+
+
+
+.mini_label {
+        position: absolute;
+        text-align:left;
+        width:130px;
+}
+
+
+.text, .hlink, .wresize {
+        font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	color: #000000;
+}
+
+
+.negat {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	color: #FF5500;
+}
+#apDiv1 {
+	position:absolute;
+	left:37px;
+	top:416px;
+	width:336px;
+	height:80px;
+	z-index:1;
+}
+#apDiv2 {
+	position:absolute;
+	left:168px;
+	top:331px;
+	width:352px;
+	height:63px;
+	z-index:1;
+}
+body {
+	background-color: #EEF6FC;
+}
+.style1 {
+	font-family: tahoma;
+	font-size: 75%;
+}
+.styleMini {
+	font-family: tahoma;
+	font-size: 55%;
+}
+
+.style20 {
+	font-family: tahoma;
+	font-size: 25%;
+}
+
+
+ .style2 {font-size: x-small}
+            .style4 {font-size: x-small; font-weight: bold; }
+            .style6 {font-size: x-small; font-weight: bold; color: #999999; }
+            .style7 {font-size: x-small; font-weight: bold; color: #FFFED2; }
+-->
+
+root { 
+    display: block;
+}
+

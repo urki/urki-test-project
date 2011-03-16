@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>VDC saša - ##TITLE##</title>
+        <style type="text/css">
+            <!--
+
+
+            .mini_label {
+                position: absolute;
+                text-align:left;
+                width:130px;
+            }
+
+
+
+
+            .text {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                font-style: normal;
+                color: #000000;
+            }
+            .negat {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                font-style: normal;
+                color: #FF5500;
+            }
+            #apDiv1 {
+                position:absolute;
+                left:37px;
+                top:416px;
+                width:336px;
+                height:80px;
+                z-index:1;
+            }
+            #apDiv2 {
+                position:absolute;
+                left:168px;
+                top:331px;
+                width:352px;
+                height:63px;
+                z-index:1;
+            }
+            body {
+                background-color: #EEF6FC;
+            }
+            .style1 {
+                font-family: tahoma;
+                font-size: 75%;
+            }
+            .styleMini {
+                font-family: tahoma;
+                font-size: 55%;
+            }
+
+            .style20 {
+                font-family: tahoma;
+                font-size: 25%;
+            }
+
+
+
+            -->
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <div align="left">
+                <table width="917" border="0" cellspacing="0">
+                    <tr>
+                        <td class="styleMini"><a href="view_notice.php"><b>Glavna stran</b></a></td>
+                        <td colspan="2" align="left" class="styleMini"><b>   ##DATE##</b></td>
+                        <td class="styleMini"><a href="logout.php"><b>Odjava</b></a>| <a href="help_main.php"><b>Pomoč</b></a></td>
+                    </tr>
+                    <tr>
+                        <td width="193" rowspan="4"><img src="./img/logo.gif" width="193" height="165" alt="logo" /></td>
+                        <td width="5">&nbsp;</td>
+                        <td width="364"></td>
+                        <td  class="styleMini"> ##IF_USER##<b> živijo ##USER####IF_USER##</b>  </td>
+                   </tr>
+                   <tr>
+                       <td rowspan="2">&nbsp;</td>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><h1><span class="style1"><strong>##TITLE##</strong> ##MONTH##</span></h1></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+          <font color=red>##MESSAGE##</font>
+    </body>

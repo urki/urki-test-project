@@ -1,0 +1,29 @@
+<style type="text/css">
+<!--
+.text {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	color: #000000;
+}
+#apDiv1 {
+	position:absolute;
+	left:37px;
+	top:416px;
+	width:336px;
+	height:80px;
+	z-index:1;
+}
+#apDiv2 {
+	position:absolute;
+	left:251px;
+	top:59px;
+	width:352px;
+	height:63px;
+	z-index:1;
+}
+body {
+	background-color: #EEF6FC;
+}
+-->
+</style>

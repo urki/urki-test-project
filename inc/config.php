@@ -1,5 +1,4 @@
 <?
-echo " a dela";
 require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
 require_once 'Zend/Auth/Adapter/DbTable.php';
 require_once 'Zend/Db.php';
@@ -18,7 +17,7 @@ require_once(dirname(dirname(__FILE__)) . '/inc/class/DAL.php');
 
     $dal=new DAL();
 
-    require_once 'model.php';
+    require_once 'local.php';
 /*$db = Zend_Db::factory('Mysqli', array(
 	//'host'     => '127.0.0.1',
         'host'     => 'localhost',

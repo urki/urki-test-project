@@ -10,5 +10,5 @@ $db = Zend_Db::factory('Mysqli', array(
 	'password' => 'geslo',
 	'dbname'   => 'intranet'
 	));
-
+zdaj je?
 ?>

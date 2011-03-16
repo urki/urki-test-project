@@ -10,6 +10,6 @@ $db = Zend_Db::factory('Mysqli', array(
 	'password' => 'geslo',
 	'dbname'   => 'intranet'
 	));
-
+tega pa ni
 
 ?>

@@ -14,7 +14,7 @@
 
                     <div class="span-19">
 
-                        <h4><b class="red">##NAMEDROPSTOP##</b> | aktivnost: <b>##ACTIVITYSTOP##</b>; pričetek ob: <b>##NSTART##</b></h4>
+                        <h4><b class="red">##NAMEDROPSTOP##</b> | aktivnost: <b>##ACTIVITYSTOP##</b>; <!--  pričetek ob: <b>##NSTART## --></b></h4>
                     </div>
 
                     <div class="span-3 last">

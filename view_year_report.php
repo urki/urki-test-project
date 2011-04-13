@@ -52,7 +52,6 @@ if (!$year)
 
 
 
-echo "OLD<hr>";
 
 $unitarray = array(75, 77, 78);
 $disorderarray = array(1, 2, 3, 4, 5);
@@ -69,8 +68,8 @@ foreach ($unitarray as $unit_in) {
     $table.=$row;
     $enota = $dal->get_unit_by_persons_unit($unit_in);
     $enota = $enota[0];
-    $table = str_replace("##UNIT##", $enota["name"], $table);
-    echo "<hr><b><h3>" . $enota["name"] . "</h3></b><hr>";
+    $table = str_replace("##UNIT##", "<b>".$enota["name"]."</b>", $table);
+//    echo "<hr><b><h3>" . $enota["name"] . "</h3></b><hr>";
     $i = 0;
 
    
@@ -81,13 +80,13 @@ foreach ($unitarray as $unit_in) {
         // $age_max = $age_min_array[$i];
         $age_max = $age_max_array[$i];
         $tableIn = str_replace("##AGEMIN##", $age_min, $tableIn);
-        echo "<hr><b>" . $age_min . "</b>";
+       // echo "<hr><b>" . $age_min . "</b>";
         if ($age_max < 56) {
             $tableIn = str_replace("##AGEMMAX##", ' in ' . $age_max, $tableIn);
-            echo "<b> in " . $age_max . "   ->  </b>";
+          //  echo "<b> in " . $age_max . "   ->  </b>";
         } else {
             $tableIn = str_replace("##AGEMMAX##", ' in več', $tableIn);
-            echo "<b> in več  -></b>";
+          //  echo "<b> in več  -></b>";
         }
         $i++;
         $x = 1;
@@ -95,7 +94,7 @@ foreach ($unitarray as $unit_in) {
             $disorders = $dal->get_count_dissorder_age_persons_by_unit($unit_in, 0, 11, $age_min, $age_max, $disorder_id);
             $disorders = $disorders[0];
             $tableIn = str_replace("##DISORDER" . $x . "##", $disorders["sestevek"], $tableIn);
-            echo $disorders["sestevek"] . "     | ";
+           // echo $disorders["sestevek"] . "     | ";
             $x++;
         }
        
@@ -106,7 +105,7 @@ foreach ($unitarray as $unit_in) {
 
 
 $tem = str_replace("##LOGS_SUB##", $table, $tem);
-$tem = str_replace("##MONTH##", " " . $mon . "/" . $year, $tem); //v header sem dal zraven naslova izpis meseca za katerega je izpis
+//$tem = str_replace("##MONTH##", " " . $mon . "/" . $year, $tem); //v header sem dal zraven naslova izpis meseca za katerega je izpis
 $tem = str_replace('##USER##', $identity, $tem);
 $tem = str_replace('##TITLE##', $TITLE, $tem);
 

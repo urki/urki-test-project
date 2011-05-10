@@ -1,4 +1,5 @@
-<?
+<?php
+
 $time = time();
 require_once("inc/config.php");
 

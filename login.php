@@ -1,4 +1,5 @@
-<?
+<?php
+ 
 $DO_NOT_REDIRECT="true";
 
 require_once("inc/config.php");
@@ -41,7 +42,7 @@ if ($user and $pass) {
 	} else {
                 
 		header("location:index.php");
-	         
+	       
         }
 } else {
 

@@ -1,4 +1,5 @@
-<?
+<?php
+
 require_once("inc/config.php");
 
 //&type_q=1&period=2009&person_id=88

@@ -1,4 +1,5 @@
-<?
+
+<?php
 
 require_once("inc/config.php");
 check_role($ROLE_LEADER);
@@ -50,7 +51,7 @@ $mesec_end = mktime(0, 0, 0, $mon, $last_day, $year);
 //////////////////////////
 //pogoj, da ce imajo role_id nizji od 80 visijo samo svoj unit in ce je porocilo ze oddano vidijo oddanega iz log_reporta
 if ($role_id < 80) {
-    $sql = "SELECT * FROM persons where unit=$role_id and id_role>30 order by first ASC";
+    $sql = "SELECT * FROM persons where unit=$role_id and id_role>30  order by first ASC";
 
 //If there's already log inserted we take it out of the DB//
     $sql_log = "SELECT *
@@ -308,16 +309,6 @@ if (!$LOG) {
         $LOG[$person_id_db]["last"] = $res["last"];
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 $table = render_log_table($LOG, $row);

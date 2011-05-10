@@ -1,4 +1,5 @@
-<?
+<?php
+
 //*$DO_NOT_REDIRECT="true";*/
 require_once("inc/config.php");
 check_role($ROLE_EMPLOYED,"login.php");

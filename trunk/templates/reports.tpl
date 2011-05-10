@@ -26,7 +26,7 @@
            ##IF_EMPLOYED##
            ##IF_LEADER##
                 <li><a href="view_report.php"  class="text"><b> Grafični poročilo uporabnikov</b></a><br></li>
-		<li><a href="casetry.php"  class="text"><b> Tabela mesečne prisotnosti uporabnikov</b></a><br></li>
+		<li><a href="view_presence.php"  class="text"><b> Tabela mesečne prisotnosti uporabnikov</b></a><br></li>
                 <li><a href="view_client_work.php"  class="text"> <b>Pregled aktivnosti po uporabniku</b></a><br></li>
            ##IF_LEADER##
 		

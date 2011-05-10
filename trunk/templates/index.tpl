@@ -1,4 +1,4 @@
-<form   action="index.php" method="post" accept-charset="utf-8">
+<form   action="index.php" method="get" accept-charset="utf-8">
     
 
     <div class="span-16" id="addlogadmin">

@@ -109,6 +109,21 @@ $sql = "SELECT DATE( FROM_UNIXTIME(  `end` ) ) datum, DATE_FORMAT( FROM_UNIXTIME
 return $this->query($sql);
 }
 
+public function yeardropdown() {
+	//require_once('../html_function.php');
+echo "ne mi tezit";
+/* 
+$Y = date("Y",time());
+for ($x=2009; $x<=$Y;$x++) {
+	$ynames[].= $x;
+}
+$yvalues = $ynames;
+$year_dropdown = html_drop_down_arrays("year",$ynames,$yvalues,date("Y",time()));
+
+$tem = str_replace("##YDROP##",$year_dropdown,$tem);
+echo $tem;
+*/
+}
 
 /*
   public function kakodela($funkcija){

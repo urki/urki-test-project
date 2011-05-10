@@ -1,4 +1,5 @@
-<?
+<?php
+
 require_once("inc/config.php");
 
 $tem = template_open("ocenjevanje.tpl");

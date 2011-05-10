@@ -17,7 +17,6 @@
         <td  class="text">##UNIT##</td>
     </tr>
 
-
     ##START_TABLE##
     <tr>
 

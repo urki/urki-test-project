@@ -1,24 +1,70 @@
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<title>ocenjevanje</title>
-
-<style type="text/css">
-<!--
-.style2 {font-size: x-small}
-.style4 {font-size: x-small; font-weight: bold; }
-.style6 {font-size: x-small; font-weight: bold; color: #999999; }
-.style7 {font-size: x-small; font-weight: bold; color: #FFFED2; }
-
--->
-</style>
-<body  bgcolor="#FFFED2"> 
-
-
 <form action="NEWaktivnosti.php" method="post" accept-charset="utf-8">
- 
 
 
-     <TABLE bgcolor="#FFFED2"  BORDER="0" CELLPADDING="10" CELLSPACING="1">
-         <TD>
+
+    <fieldset class="shadowcontainer">
+        <legend></legend>
+        <div class="span-24 showgrid">
+            <h3>Vnos aktivnosti:</h3>
+            <div class="span-24 showgrid">
+                <div class="span-16 showgrid">
+
+                    <div class="span-5">
+                        <label>Izbor osebe:</label><br>
+                        ##NAMES##
+                    </div>
+                    <div class="span-5">
+                        <label>Ocenjevalec:</label><br>
+                        ##ASSNAMES##
+                    </div>
+                    <div class="span-1">
+                        <label>Dan:</label><br>
+                        ##ADAY##
+                    </div>
+                    <div class="span-2">
+                        <label>Mesec:</label><br>
+                        ##AMONTH##
+                    </div>
+                    <div class="span-3 last">
+                        <label>Leto:</label><br>
+                        ##AYEAR##
+                    </div>
+                    <div class="span-9 clear">
+                        <label>Aktivnost:</label><br>
+                        ##WORK##
+                    </div>
+                </div>
+                <div class="span-8  showgrid last">
+                    <label>Opomba:</label><br>
+<textarea name="note" id="note" cols="49" rows="1"></textarea>
+                </div>
+                <div class="span-24 clear showgrid">
+                    <div class="span-3 clear">
+                        <label>Začetek:</label><br>
+                        ##STARTTIMEHOUR##/##STARTTIMEMIN##
+                    </div>
+                    <div class="span-3">
+                        <label>Konec:</label><br>
+                        ##STOPTIMEHOUR##/##STOPTIMEMIN##
+                    </div>
+                    <div class="span-3">
+                        <label>Neaktivno delo:</label><br>
+                        ##PAUSEHOURTIME##/##PAUSEMINTIME##
+                    </div>
+                    <div class="push-7 last" id="activity1add">
+                        <input name="add" id="add" value="    Vstavi    " type="submit">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+
+     <table bgcolor="#FFFED2"  BORDER="1" CELLPADDING="10" CELLSPACING="1">
+         <td>
 
 
                <!--/////Prva vrsta -->
@@ -28,14 +74,14 @@
                     </tr>
                   </TABLE>
                 <!--/////KONEC Prva vrsta -->
-                   <TABLE bgcolor="#FFFED2" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+                   <TABLE bgcolor="#FFFED2" BORDER="1" CELLPADDING="0" CELLSPACING="0">
                      <tr>
                         <td height=14 bgcolor="#FFFED2"><span class="style6">  </span></td>  <!--vmesna kolona za boljši pregled -->
                      </tr>
                   </TABLE>
 
                  <!--/////Prva vrsta -->
-                     <TABLE bgcolor="#FFFED2" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+                     <TABLE bgcolor="#FFFED2" BORDER="1" CELLPADDING="0" CELLSPACING="0">
                       <tr>
                        <strong>Aktivnosti uporabnikov:</strong>
                          
@@ -62,7 +108,7 @@
                    </TABLE>
                 <!--/////KONEC Prva vrsta -->
                 <!--/////Druga vrsta -->
-                   <TABLE bgcolor="#FFFED2" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+                   <TABLE bgcolor="#FFFED2" BORDER="1" CELLPADDING="0" CELLSPACING="0">
                          <tr>
                            <td height=10 bgcolor="#FFFED2"><span class="style6">  </span></td>  <!--vmesna kolona za boljši pregled -->
                         </tr>
@@ -113,8 +159,8 @@
                 <!--/////TRETJA vrsta -->
                    
                 <!--/////KONEC vrsta -->
-        </TD>
- </TABLE>
+        </td>
+ </table>
 
 
 </form>

@@ -9,7 +9,7 @@ $TITLE = "Aktivnosti";
 
 
 //$tem = template_open("NEWadd_work_emplo.tpl").
-$tem = template_open("NEWaktivnosti_head.tpl").
+$tem = template_open("drekstos.tpl").//NEWaktivnosti_head.tpl").
 
         $tem = template_open("NEWview_last_insert_client_diary.tpl").
 
@@ -30,12 +30,12 @@ if ($role_id) {
             $tem = str_replace("##IF_LEADER##","",$tem);
             break;
 
-        case ($role_id <= $ROLE_ADMIN and $role_id >= $ROLE_LEADER):
+        case ($role_id < $ROLE_ADMIN and $role_id >= $ROLE_LEADER):
             $tem =  template_clean_up_tags($tem,"##IF_ADMIN##",1);
             $tem = str_replace("##IF_BUT_LEADER##","",$tem);
             break;
 
-        case ($role_id <= $ROLE_LEADER and $role_id >= $ROLE_EMPLOYED):
+        case ($role_id < $ROLE_LEADER and $role_id >= $ROLE_EMPLOYED):
             $tem =  template_clean_up_tags($tem,"##IF_ADMIN##",1);
             $tem =  template_clean_up_tags($tem,"##IF_LEADER##",1);
             $tem = str_replace("##IF_BUT_LEADER##","",$tem);
@@ -180,7 +180,7 @@ if ($_REQUEST['add'] == "    Shrani    "  ) {
 
 
     //Če je administrator se štejejo tudi dnevi in se lahko izbere tudi ocenjevalec
-    If ($role_id>80) {
+    If ($role_id>=80) {
         $start_time = mktime ($hour_start_time_drop, $min_start_time_drop, 0,  $month_drop ,$day_drop,$year_drop);
         $stop_time  = mktime ($hour_stop_time_drop , $min_stop_time_drop , 0,  $month_drop ,$day_drop,$year_drop);
         $pause_time = $pause_hour_time_drop*3600+$pause_min_time_drop*60;

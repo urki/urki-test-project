@@ -22,7 +22,7 @@
 
 
                <!--/////Prva vrsta -->
-                  <TABLE TABINDEX=-1 bgcolor="#FFFED2" BORDER="1" CELLPADDING="0" CELLSPACING="0">
+                  <TABLE TABINDEX=-1 bgcolor="#FFFED2" BORDER="0" CELLPADDING="0" CELLSPACING="0">
                     <tr>
                         <td ><iframe src="add_work_emplo.php" TABINDEX=-1 width="900" height="115" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">Nalaganje ...</iframe></td>
                     </tr>

@@ -4,7 +4,7 @@
 ##IF_EMPLOYED##<a href="index.php" class="text"><b>Evidenca prisotnosti</b></a>
         ##IF_LEADER##  | <a href="add_log_admin.php" class="text"><b>Evidenca OE</b></a>
         ##IF_LEADER## 
-   | <a href="activity.php" class="text" target="_blank"><B>Aktivnosti</B></a>
+   | <a href="NEWaktivnosti.php" class="text"><B>Aktivnosti</B></a>
 ##IF_EMPLOYED##
 ##IF_LEADER####IF_LEADER##
 ##IF_ADMIN####IF_ADMIN## 

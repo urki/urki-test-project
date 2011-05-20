@@ -17,15 +17,15 @@ require_once(dirname(dirname(__FILE__)) . '/inc/class/DAL.php');
 
     $dal=new DAL();
 
-    require_once 'local.php';
-/*$db = Zend_Db::factory('Mysqli', array(
+   // require_once 'local.php';
+$db = Zend_Db::factory('Mysqli', array(
 	//'host'     => '127.0.0.1',
         'host'     => 'localhost',
 	'username' => 'root',
-	'password' => 'pass',
+	'password' => 'uR34Ga87',
 	'dbname'   => 'intranet'
 	));
-*/
+
 
 
 $auth = Zend_Auth::getInstance(); 
@@ -45,7 +45,7 @@ if ($auth->hasIdentity()) {
 }
 //$BASE_DIR="/Users/samek/Sites/komplet";
 //$BASE_DIR="/Applications/MAMP/htdocs/komplet/";
-$BASE_DIR="/var/www/intranetDevelop";
+$BASE_DIR="/home/uros/Projects/intranetDevelop";
 //$BASE_DIR="/var/www/komplet";
 $TEMPLATE_DIR=$BASE_DIR."/templates/";
 

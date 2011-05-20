@@ -233,7 +233,12 @@ if ($_REQUEST['add'] == "    Shrani    "  ) {
 
 
         if ($success) {
-            echo "<script>alert('Vnos se prekriva z  vnosom številka $check_id')</script>";
+             {            //<a href="http://localhost/intranetDevelop/view_client_diary.php?id=$check_id">Link text</a>
+                        $messagetype = "error";
+                       // $message .= "Vnos se prekriva z  vnosom številka: $check_id <a href='view_client_diary.php?id='$check_id'>fadfda</a> <br />'";
+                         $message .= 'Vnos se prekriva z  vnosom številka: <a href="view_client_diary.php?id='.$check_id.'" target="_blank">'.$check_id.'</a> <br />';
+                    }
+            //echo "<script>alert('Vnos se prekriva z  vnosom številka $check_id')</script>";
             //$message.= "Vpis prekriva HMMMMMMM vnos". $check_id;
             // exit();
         } else {
@@ -626,7 +631,7 @@ $tem = template_clean_up_tags($tem,"##");
 
 
 
-
+$tem = str_replace('##MESSAGETYPE##', $messagetype, $tem);
 $tem = str_replace('##ADAY##',$day_dropdown,$tem);
 $tem = str_replace('##AMONTH##',$month_dropdown,$tem);
 $tem = str_replace('##AYEAR##',$year_dropdown,$tem);

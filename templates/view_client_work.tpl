@@ -1,9 +1,10 @@
 
 <form action="##SELF##" method="POST">
-Izberi mesec: ##MDROP## 
+##IF_ROLE_LIST##Izberi mesec: ##MDROP##
 Izberi leto: ##YDROP##
 oseba: ##NAME_DROP##
 <input type="submit" name="prikazi" value="prikazi">
+##IF_ROLE_LIST##
 </form>
 <br>
 <br>
@@ -22,7 +23,8 @@ oseba: ##NAME_DROP##
     <td width="20" bgcolor="#999999" class="text"><div align="center">pisna ocena</div></td>
     
   </tr>
-##START_LOG##  
+##START_LOG##
+
 <tr>
     <td align="center" bordercolor="#999999" class="text">##ID##</td>
     <td align="center" bordercolor="#999999" class="text">##DATUM##</td>

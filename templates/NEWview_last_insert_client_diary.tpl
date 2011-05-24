@@ -1,6 +1,3 @@
-<!--<meta http-equiv="refresh" content="300"> -->
-
-
 <table  cellspacing="0" width="932" border="0" bgcolor="#e5e4bd" >
   <tr>
       <td colspan="7"  bgcolor="#ecebc3" "><div align="center"><STRONG>Zadnji trije vnosi:</STRONG></div></td>

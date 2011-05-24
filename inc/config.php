@@ -22,15 +22,19 @@ $db = Zend_Db::factory('Mysqli', array(
 	//'host'     => '127.0.0.1',
         'host'     => 'localhost',
 	'username' => 'root',
-	'password' => 'uR34Ga87',
+	'password' => 'pass',
 	'dbname'   => 'intranet'
 	));
+
+
+$db->query('SET NAMES \'utf8\'');
 
 
 
 $auth = Zend_Auth::getInstance(); 
 if ($auth->hasIdentity()) { 
-	// Identity exists; get it 
+	// Identity exists; get it
+
 	$identity = $auth->getIdentity(); 
 	$sql = "SELECT id_role,id_person,unit FROM persons where username='$identity'";
 	$data =  $db->fetchAll($sql);
@@ -55,7 +59,7 @@ $ROLE_EMPLOYED = 40;
 $ROLE_ADMIN = 80;
 $ROLE_LEADER = 71;
 $ROLE_ZALEC =75;
-
+$ROLE_LIST=150;
 $NUM_OF_REPORT=4; //število reportov da pošlje, da so vsi zaključeni
 
 function check_role($role_id_param,$url = FALSE) {

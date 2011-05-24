@@ -23,6 +23,19 @@ for( $x=1;$x<13;$x++) {
 	else 
 		$names[] .=$x;
 }
+
+if (!$id) {
+    $id = "<>0";
+} else {
+    $id = "=$id";
+    $role_id = $ROLE_LIST;
+}
+
+
+
+
+
+
 $values = $names;
 
 $month_dropdown = html_drop_down_arrays("mon",$names,$values,date("m",time()));
@@ -51,6 +64,42 @@ $name_dropdown = html_drop_down_arrays("name_drop",$names,$values,$name_drop);
 //////////////////////
 
 
+if ($role_id>=$ROLE_LIST){
+
+		$sql = "SELECT `id`,day(from_unixtime(start))datum,`timestamp`,
+                                applic.name program,work.name delo, `testing`,`persons`.`first` ime_varov,
+                                `persons`.`last` priim_varov, time(from_unixtime(`start`)) start, time(from_unixtime(`end`)) end ,
+                                 sec_to_time((`end`) -(`start`)) delal,sec_to_time((`end`) -(`start`)-pause) adelal,
+                                 sec_to_time(`work_log`.`pause`) odmori,`work_log`.`assessment` ocena, `work`.`name`, `comm`,`work`.`payment`, unit, id_role
+                        FROM
+                                (applic JOIN `work` ON applic.`applic_id`=work.`applic_id`)
+                              RIGHT OUTER JOIN
+                                (persons right outer join work_log on persons.id_person=work_log.person_id) ON work_log.work_id=work.work_id
+                        WHERE  id$id
+                        ORDER BY applic.name,date(from_unixtime(start))"; ///unit ne pozabit
+
+                $result = $db->fetchAll($sql);
+                foreach ($result as $res) {
+                
+                $table = $row;
+ 		$table = str_replace("##ID##",$res["id"],$table);
+		$table = str_replace("##DATUM##",$res["datum"],$table);
+		//$table = str_replace("##NAME##",$res["ime_varov"]." ".$res["priim_varov"],$table);
+		$table = str_replace("##PROGRAM##",$res["program"],$table);
+		$table = str_replace("##DELO##",$res["delo"],$table);
+		$table = str_replace("##DELAL##",$res["delal"],$table);
+		$table = str_replace("##ODMOR##",$res["odmori"],$table);
+		$table = str_replace("##ADELAL##",$res["adelal"],$table);
+		$table = str_replace("##OCENA##",$res["ocena"],$table);
+		$table = str_replace("##OCENJEV##",$res["testing"],$table);
+		$table = str_replace("##COMM##",$res["comm"],$table);
+		$whole_table.=$table;
+	}
+        }
+
+
+
+
 //spremenljivki za mesec ine leto
 if ($mon<1 or $mon>12)
 	$mon ='';
@@ -75,21 +124,9 @@ if ($mon and $year and $name_drop) {
                                 (applic JOIN `work` ON applic.`applic_id`=work.`applic_id`)
                               RIGHT OUTER JOIN
                                 (persons right outer join work_log on persons.id_person=work_log.person_id) ON work_log.work_id=work.work_id
-                        WHERE  `persons`.`unit`=$role_id and `id_person`=$name_drop  and month(from_unixtime(start))=$mon and year(from_unixtime(start))=$year
+                        WHERE  id$id and `persons`.`unit`=$role_id and `id_person`=$name_drop  and month(from_unixtime(start))=$mon and year(from_unixtime(start))=$year
                         ORDER BY applic.name,date(from_unixtime(start))"; ///unit ne pozabit
-                    
-                    /* $sql = "SELECT `id`,day(from_unixtime(start))datum,`timestamp`,
-                                applic.name program,work.name delo, `testing`,`persons`.`first` ime_varov,
-                                `persons`.`last` priim_varov, time(from_unixtime(`start`)) start, time(from_unixtime(`end`)) end ,
-                                 sec_to_time((`end`) -(`start`)) delal,sec_to_time((`end`) -(`start`)-pause) adelal,
-                                 sec_to_time(`work_log`.`pause`) odmori,`work_log`.`assessment` ocena, `work`.`name`, `comm`,`work`.`payment`, unit, id_role
-                        FROM
-                                (applic JOIN `work` ON applic.`applic_id`=work.`applic_id`)
-                              RIGHT OUTER JOIN
-                                (persons right outer join work_log on persons.id_person=work_log.person_id) ON work_log.work_id=work.work_id
-                        WHERE if($role_id<$ROLE_ADMIN, if($role_id>$ROLE_LEADER,(`persons`.`unit`=$role_id),assessor_id=$person_id),unit>=0) and `id_person`=$name_drop  and month(from_unixtime(start))=$mon and year(from_unixtime(start))=$year
-                        ORDER BY applic.name,date(from_unixtime(start))";                
-*/
+            
 	}
 
 	else{		
@@ -103,8 +140,9 @@ if ($mon and $year and $name_drop) {
                             (applic JOIN `work` ON applic.`applic_id`=work.`applic_id`)
                            RIGHT OUTER JOIN
                               (persons right outer join work_log on persons.id_person=work_log.person_id) ON work_log.work_id=work.work_id
-                        WHERE  `id_person`=$name_drop  and month(from_unixtime(start))=$mon and year(from_unixtime(start))=$year
-                        ORDER BY applic.name,date(from_unixtime(start))"; //brez unit  
+                        WHERE  id$id and `id_person`=$name_drop  and month(from_unixtime(start))=$mon and year(from_unixtime(start))=$year
+                        ORDER BY applic.name,date(from_unixtime(start))"; //brez unit
+                
 	}
 
 //	echo $sql;

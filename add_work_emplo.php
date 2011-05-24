@@ -5,17 +5,11 @@ require_once("inc/config.php");
 check_role($ROLE_EMPLOYED,"login.php");
 $TITLE = "Evidenca zaposlenih";
 
+$tem = template_open("NEWaktivnosti_employe.tpl");
+$tem = template_add_head_foot($tem,head,foot);
 
-$tem = template_open("add_work_emplo.tpl");
-//$tem = template_add_head_foot($tem,head,foot);
 
 
-//$sql = "SELECT * FROM `work` WHERE $role_id>=`group` and `group`>$ROLE_USER ORDER BY `applic_id`,`subcat_id`";
-
-// tega sem 1. avgusta odstranil 
-//$sql = "SELECT * FROM `work`,`applic` WHERE $role_id>=`group` and `group`>$ROLE_USER and `work`.`applic_id`=`applic`.`applic_id` ORDER BY `work`.`applic_id`,`subcat_id`";
-
-//ta je pa novi
 $sql = "SELECT `work_id`,`work`.`applic_id`,`subcat_id`, `applic`.`name` Program, `work`.`name` name, `opis` FROM `work`,`applic` WHERE '$role_id'>=`group` and `group`>'$ROLE_USER' and `work`.`applic_id`=`applic`.`applic_id` ORDER BY `work`.`applic_id`,`subcat_id`"; 
 
 

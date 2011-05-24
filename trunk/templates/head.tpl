@@ -51,7 +51,7 @@ document.editform3.submit();
     <body>
 
         <div class="container howgrid">
-            <div class="span-24" id="maintopheader">
+            <div class="span-24 last" id="maintopheader">
                 <div class="span-19" id="leftheadertop">
                     <a href="view_notice.php"><b>Glavna stran</b></a>
                 </div>
@@ -64,7 +64,7 @@ document.editform3.submit();
             </div>
             <hr></hr>
 
-            <div class="span-24" id="mainheader">
+            <div class="span-24 last" id="mainheader">
                 <div class="span-6" id="logo">
                     <a href="http://192.168.50.2/blog"><img style="border: 0px solid ; width: 193px; height: 165px;" src="img/logo.gif" alt="logo" align="middle" /></a>
                 </div>

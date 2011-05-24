@@ -1,10 +1,10 @@
-<form action="NEWaktivnosti.php" method="post" accept-charset="utf-8">
+<form action="aktivnosti.php" method="post" accept-charset="utf-8">
 
 
-    <fieldset class="shadowcontainer">
+    <fieldset class="shadowcontainer clear">
         <legend></legend>
         <div class="span-24">
-            <h3>Vnos aktivnosti:</h3>
+            <h3>Vnos aktivnosti uporabnikov:</h3>
             <div class="span-24">
                 <div class="span-16">
 

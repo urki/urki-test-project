@@ -22,7 +22,7 @@ $db = Zend_Db::factory('Mysqli', array(
 	//'host'     => '127.0.0.1',
         'host'     => 'localhost',
 	'username' => 'root',
-	'password' => 'pass',
+	'password' => 'uR34Ga87',
 	'dbname'   => 'intranet'
 	));
 

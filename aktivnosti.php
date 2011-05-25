@@ -61,6 +61,8 @@ if ($role_id) {
 ///////////////////////////////////////////////////////////////////////////////////7
 
 
+//get name of login person
+   $nameOfloginPerson = $db->fetchOne("SELECT first FROM `persons` WHERE id_person=$person_id");
 
 
 
@@ -107,7 +109,7 @@ $emp_sql = "SELECT * FROM persons WHERE 20<`id_role` and unit<>0 order by unit, 
 $result = $db->fetchAll($emp_sql);
 foreach ($result as $res) {
     if (!is_array($emp_assnames)) {
-        $emp_assnames[] = "ocenjevalec"; //"ime in priimek...";
+        $emp_assnames[] = "zaposleni"; //"ime in priimek...";
         $emp_assvalues[] = "";
     }
     $emp_assnames[] .= $res["last"] . " " . $res["first"];
@@ -136,8 +138,8 @@ $emp_work_dropdown = html_drop_down_arrays("emp_work_drop", $emp_wname, $emp_wva
 //$name = $_REQUEST['name'];
 
 
-if ($_REQUEST['addemploy'] == "    Shrani    ") {
 
+if ($_REQUEST['addemploy'] == "   Shrani   ") {
 
 
 
@@ -145,7 +147,13 @@ if ($_REQUEST['addemploy'] == "    Shrani    ") {
     If ($role_id >= 80) {
         $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
         $emp_stop_time = mktime($emp_hour_stop_time_drop, $emp_min_stop_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
-    }
+       // $nameOfloginPerson = $db->fetchOne("SELECT first FROM `persons` WHERE id_person=$person_id");
+        $noteemploy.="//dodal $nameOfloginPerson";
+
+        $messagetype = "notice";
+        $message .= "$nameOfloginPerson, Šel je k role_id > 80 in je tako hour_start_time_drop=$hour_start_time_drop ; emp_min_start_time_drop=$emp_min_start_time_drop in emp_month_drop=$emp_month_drop , emp_year_drop=$emp_year_drop !!<br />";
+
+        }
     //če pa je "samo" vodja pa ne more vpisovati dni in ocenjevalca
     else {
         $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, date("n", time()), date("j", time()), $year = date("Y", time()));
@@ -158,13 +166,20 @@ if ($_REQUEST['addemploy'] == "    Shrani    ") {
 
 //Preveri če so vsa polja izpolnjena
     //  if ($person_id and $emp_work_drop and $emp_start_time and $emp_stop_time and ($emp_start_time < $emp_stop_time) and (($emp_stop_time - $emp_start_time) > $pause_time) and $name_drop != 0) {
-    if ($person_id and $emp_work_drop and $emp_start_time and $emp_stop_time and $name_drop != 0) {
+    if ($person_id and $emp_work_drop and $emp_start_time and $emp_stop_time and $emp_ass_name_drop != 0) {
+
+
+        $messagetype = "notice";
+        $message .= ' Izpolnil se je pogoj, da so vsa polja polna!!<br />';
+        
+        
         $allow = true;
         $all_fields = true;
     } else {
         $allow = false;
         $messagetype = "error";
-        $message .= ' Izpolni vsa polja!!<br />';
+      //  $message .= ' Izpolni vsa polja!!<br />';
+          $message .= "Izpolni vsa polja!! person_id=$person_id, emp_work=$emp_work_drop, emp_start_time=$emp_start_time, emp_stop_time=$emp_stop_time, emp_ass_name_drop=$emp_ass_name_drop <br />";
     }
 
     //če so izpolnjna...
@@ -172,7 +187,7 @@ if ($_REQUEST['addemploy'] == "    Shrani    ") {
 
 //preveri če se prekriva
 
-        $emp_sql = "SELECT timestamp ,id FROM work_log  where (person_id = '$name_drop'  and  (end >'$emp_start_time' AND start<'$emp_stop_time')) or person_id= '$emp_ass_name_drop' and  (end >'$emp_start_time' AND start<'$emp_stop_time')";
+        $emp_sql = "SELECT timestamp ,id FROM work_log  where (person_id = 'emp_ass_name_drop'  and  (end >'$emp_start_time' AND start<'$emp_stop_time')) or person_id= '$emp_ass_name_drop' and  (end >'$emp_start_time' AND start<'$emp_stop_time')";
         try {
             $result = $db->fetchAll($emp_sql);
             $overlap = true;
@@ -246,16 +261,14 @@ if ($_REQUEST['addemploy'] == "    Shrani    ") {
 
         //dejansko vnesemo
         $data = array(
-            'person_id' => $name_drop,
-            'emp_assessor_id' => $emp_ass_name_drop, //$person_id,
+            'person_id' => $emp_ass_name_drop,
+            'assessor_id' =>"0", //$person_id,
             'work_id' => $emp_work_drop,
             'start' => $emp_start_time,
             'end' => $emp_stop_time,
-            'pause' => $pause_time,
-            'assessment' => $rating_drop, //$assessment,
-            'comm' => $note,
-            'testing' => $identity
-        );
+            'location_id'=>$wlocation_drop,
+            'comm' => $noteemploy,
+                 );
         $db->insert('work_log', $data);
         $allow = false;
         $allow_onjob = false;
@@ -265,6 +278,9 @@ if ($_REQUEST['addemploy'] == "    Shrani    ") {
         exit;
     }
 }
+$tem = str_replace("##WADAY##", $emp_day_dropdown, $tem);
+$tem = str_replace("##WAMONTH##", $emp_month_dropdown, $tem);
+$tem = str_replace("##WAYEAR##", $emp_year_dropdown, $tem);
 $tem = str_replace("##WWORK_DROP##", $emp_work_dropdown, $tem);
 $tem = str_replace('##WSTARTTIMEHOUR##', $emphour_start_time_dropdown, $tem);
 $tem = str_replace('##WSTARTTIMEMIN##', $empmin_start_time_dropdown, $tem);
@@ -276,7 +292,7 @@ $tem = str_replace("##WNAME_DROP##", $emp_ass_name_dropdown, $tem);
 $tem = str_replace("##WMESSAGE##", $wmessage, $tem);
 ////////////////
 /////////////////
-/////////////////
+/////////////////$emp_ass_name_dropdown
 ////////////////
 ////////////////
 
@@ -398,6 +414,8 @@ if ($_REQUEST['add'] == "    Shrani    ") {
         $start_time = mktime($hour_start_time_drop, $min_start_time_drop, 0, $month_drop, $day_drop, $year_drop);
         $stop_time = mktime($hour_stop_time_drop, $min_stop_time_drop, 0, $month_drop, $day_drop, $year_drop);
         $pause_time = $pause_hour_time_drop * 3600 + $pause_min_time_drop * 60;
+        $note.="//dodal $nameOfloginPerson";
+
     }
     //če pa je "samo" vodja pa ne more vpisovati dni in ocenjevalca
     else {
@@ -495,6 +513,7 @@ if ($_REQUEST['add'] == "    Shrani    ") {
     }
 
 
+
 //če je še vedno dovoljeno potem...
     if ($allow == true and $allow_onjob == true) {
 
@@ -512,10 +531,14 @@ if ($_REQUEST['add'] == "    Shrani    ") {
         );
         $db->insert('work_log', $data);
 
-        //$message .= "Vnos je dodan";
+         
         //header("location:".$_SERVER['HTTP_REFERER']);
-        header("location:NEWaktivnosti.php" . $param);
-        exit;
+       // header("location:aktivnosti.php" . $param);
+        $messagetype = "success";
+        $message .= ' Vnos je dodan!<br />';
+          
+      
+       // exit;
     }
 }
 

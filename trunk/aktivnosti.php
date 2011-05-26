@@ -1,6 +1,5 @@
 <?php
 
-
 require_once("inc/config.php");
 
 
@@ -59,10 +58,8 @@ if ($role_id) {
 }
 //KONEC  Za izpis tistih katere hočem  - to moram prestavit v funkcijo!!!!!!!
 ///////////////////////////////////////////////////////////////////////////////////7
-
-
 //get name of login person
-   $nameOfloginPerson = $db->fetchOne("SELECT first FROM `persons` WHERE id_person=$person_id");
+$nameOfloginPerson = $db->fetchOne("SELECT first FROM `persons` WHERE id_person=$person_id");
 
 
 
@@ -103,7 +100,6 @@ foreach ($result as $res) {
 }
 $wlocation_dropdown = html_drop_down_arrays("wlocation_drop", $wlname, $wlvalue, $wlocation_drop);
 //
-
 //drop down za dolocitev vpisovalca aktivnosti
 $emp_sql = "SELECT * FROM persons WHERE 20<`id_role` and unit<>0 order by unit, letter ASC";
 $result = $db->fetchAll($emp_sql);
@@ -147,13 +143,12 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
     If ($role_id >= 80) {
         $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
         $emp_stop_time = mktime($emp_hour_stop_time_drop, $emp_min_stop_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
-       // $nameOfloginPerson = $db->fetchOne("SELECT first FROM `persons` WHERE id_person=$person_id");
+        // $nameOfloginPerson = $db->fetchOne("SELECT first FROM `persons` WHERE id_person=$person_id");
         $noteemploy.="//dodal $nameOfloginPerson";
 
-        $messagetype = "notice";
-        $message .= "$nameOfloginPerson, Šel je k role_id > 80 in je tako hour_start_time_drop=$hour_start_time_drop ; emp_min_start_time_drop=$emp_min_start_time_drop in emp_month_drop=$emp_month_drop , emp_year_drop=$emp_year_drop !!<br />";
-
-        }
+      //  $messagetype = "notice";
+     //   $message .= "$nameOfloginPerson, Šel je k role_id > 80 in je tako hour_start_time_drop=$hour_start_time_drop ; emp_min_start_time_drop=$emp_min_start_time_drop in emp_month_drop=$emp_month_drop , emp_year_drop=$emp_year_drop !!<br />";
+    }
     //če pa je "samo" vodja pa ne more vpisovati dni in ocenjevalca
     else {
         $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, date("n", time()), date("j", time()), $year = date("Y", time()));
@@ -168,18 +163,20 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
     //  if ($person_id and $emp_work_drop and $emp_start_time and $emp_stop_time and ($emp_start_time < $emp_stop_time) and (($emp_stop_time - $emp_start_time) > $pause_time) and $name_drop != 0) {
     if ($person_id and $emp_work_drop and $emp_start_time and $emp_stop_time and $emp_ass_name_drop != 0) {
 
+        //test
+        //$messagetype = "notice";
+        //$message .= ' Izpolnil se je pogoj, da so vsa polja polna!!<br />';
+        //konecTesta
 
-        $messagetype = "notice";
-        $message .= ' Izpolnil se je pogoj, da so vsa polja polna!!<br />';
-        
-        
         $allow = true;
         $all_fields = true;
     } else {
         $allow = false;
         $messagetype = "error";
-      //  $message .= ' Izpolni vsa polja!!<br />';
-          $message .= "Izpolni vsa polja!! person_id=$person_id, emp_work=$emp_work_drop, emp_start_time=$emp_start_time, emp_stop_time=$emp_stop_time, emp_ass_name_drop=$emp_ass_name_drop <br />";
+        $message .= ' Izpolni vsa polja!!<br />';
+        //test
+        //$message .= "Izpolni vsa polja!! person_id=$person_id, emp_work=$emp_work_drop, emp_start_time=$emp_start_time, emp_stop_time=$emp_stop_time, emp_ass_name_drop=$emp_ass_name_drop <br />";
+        //test
     }
 
     //če so izpolnjna...
@@ -262,20 +259,24 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
         //dejansko vnesemo
         $data = array(
             'person_id' => $emp_ass_name_drop,
-            'assessor_id' =>"0", //$person_id,
+            'assessor_id' => "0", //$person_id,
             'work_id' => $emp_work_drop,
             'start' => $emp_start_time,
             'end' => $emp_stop_time,
-            'location_id'=>$wlocation_drop,
+            'location_id' => $wlocation_drop,
             'comm' => $noteemploy,
-                 );
+        );
         $db->insert('work_log', $data);
         $allow = false;
         $allow_onjob = false;
         //$message .= "Vnos je dodan";
         //header("location:".$_SERVER['HTTP_REFERER']);
-        header("location:aktivnosti.php" . $param);
-        exit;
+      //  header("location:aktivnosti.php" . $param);
+      //  exit;
+
+         $messagetype = "success";
+        $message .= ' Vnos je dodan!<br />';
+
     }
 }
 $tem = str_replace("##WADAY##", $emp_day_dropdown, $tem);
@@ -295,23 +296,6 @@ $tem = str_replace("##WMESSAGE##", $wmessage, $tem);
 /////////////////$emp_ass_name_dropdown
 ////////////////
 ////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Activity of users
 
 $qhour_start_time = range(0, 23);
@@ -415,7 +399,6 @@ if ($_REQUEST['add'] == "    Shrani    ") {
         $stop_time = mktime($hour_stop_time_drop, $min_stop_time_drop, 0, $month_drop, $day_drop, $year_drop);
         $pause_time = $pause_hour_time_drop * 3600 + $pause_min_time_drop * 60;
         $note.="//dodal $nameOfloginPerson";
-
     }
     //če pa je "samo" vodja pa ne more vpisovati dni in ocenjevalca
     else {
@@ -456,6 +439,8 @@ if ($_REQUEST['add'] == "    Shrani    ") {
                 $messagetype = "error";
                 //začasno izklopljena
                 //$message .= 'Vnos se prekriva z  vnosom številka: <a href="view_client_work.php?id=' . $check_id . '" target="_blank">' . $check_id . '</a> <br />';
+
+
                 $message .= 'Vnos se prekriva z vnosom številka: <b>' . $check_id . '</b></a> <br />';
                 $allow = false;
             }
@@ -531,14 +516,14 @@ if ($_REQUEST['add'] == "    Shrani    ") {
         );
         $db->insert('work_log', $data);
 
-         
+
         //header("location:".$_SERVER['HTTP_REFERER']);
-       // header("location:aktivnosti.php" . $param);
+        // header("location:aktivnosti.php" . $param);
         $messagetype = "success";
         $message .= ' Vnos je dodan!<br />';
-          
-      
-       // exit;
+
+
+        // exit;
     }
 }
 

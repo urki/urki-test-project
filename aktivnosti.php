@@ -28,17 +28,20 @@ if ($role_id) {
             $tem = template_clean_up_tags($tem, "##IF_BUT_ADMIN##", 1);
             $tem = str_replace("##IF_ADMIN##", "", $tem);
             $tem = str_replace("##IF_LEADER##", "", $tem);
+            $conditionUnit="";//to be in that unit
             break;
 
         case ($role_id < $ROLE_ADMIN and $role_id >= $ROLE_LEADER):
             $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
             $tem = str_replace("##IF_BUT_LEADER##", "", $tem);
+             $conditionUnit="and unit=$unit";//to be in that unit
             break;
 
         case ($role_id < $ROLE_LEADER and $role_id >= $ROLE_EMPLOYED):
             $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
             $tem = template_clean_up_tags($tem, "##IF_LEADER##", 1);
             $tem = str_replace("##IF_BUT_LEADER##", "", $tem);
+             $conditionUnit="and unit=$unit";//to be in that unit
             break;
 
         default:
@@ -117,7 +120,7 @@ $emp_ass_name_dropdown = html_drop_down_arrays("emp_ass_name_drop", $emp_assname
 
 
 //dropdown za izbiro aktivnosti uporabnika
-$emp_sql = "SELECT * FROM `work` WHERE $ROLE_USER>=`group` ORDER BY `applic`";
+$emp_sql = "SELECT * FROM `work` WHERE `group` between 11 and 99  ORDER BY `applic`";
 $result = $db->fetchAll($emp_sql);
 foreach ($result as $res) {
     if (!is_array($emp_wname)) {
@@ -160,8 +163,9 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
 
 
 //Preveri če so vsa polja izpolnjena
+
     //  if ($person_id and $emp_work_drop and $emp_start_time and $emp_stop_time and ($emp_start_time < $emp_stop_time) and (($emp_stop_time - $emp_start_time) > $pause_time) and $name_drop != 0) {
-    if ($person_id and $emp_work_drop and $emp_start_time and $emp_stop_time and $emp_ass_name_drop != 0) {
+    if ($person_id and $emp_work_drop and $emp_start_time and $emp_stop_time and $emp_ass_name_drop != 0 and $wlocation_drop != 0) {
 
         //test
         //$messagetype = "notice";
@@ -195,8 +199,8 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
 
                 $messagetype = "error";
                 //začasno izklopljena
-                //$message .= 'Vnos se prekriva z  vnosom številka: <a href="view_client_work.php?id=' . $check_id . '" target="_blank">' . $check_id . '</a> <br />';
-                $message .= 'Vnos se prekriva z vnosom številka: <b>' . $check_id . '</b></a> <br />';
+                $message .= 'Vnos se prekriva z  vnosom številka: <a href="view_client_work.php?id=' . $check_id . '" target="_blank">' . $check_id . '</a> <br />';
+               // $message .= 'Vnos se prekriva z vnosom številka: <b>' . $check_id . '</b></a> <br />';
                 $allow = false;
             }
         } catch (Exception $e) {
@@ -342,7 +346,7 @@ $year_dropdown = html_drop_down_arrays("year_drop", $qyear, $qyear, date("Y", ti
 
 
 //drop down za dolocitev uporabnika katerega se vpisuje
-$sql = "SELECT * FROM persons WHERE $ROLE_USER>=`id_role` and unit<>0 order by unit, letter ASC";
+$sql = "SELECT * FROM persons WHERE $ROLE_USER>=`id_role` and unit<>0  $conditionUnit order by unit, letter ASC";
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
     if (!is_array($names)) {

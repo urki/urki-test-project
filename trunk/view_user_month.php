@@ -6,7 +6,7 @@ check_role($ROLE_LEADER);
 
 $TITLE = "Poro&#269;ilo evidence prisotnosti za";
 
-
+       
 
 
 //pogoj, da se ob razlicnem role_id odpre razlicen template
@@ -90,6 +90,7 @@ if (!$LOG) {
 
         $result_person_year = $db->fetchAll($sql_person);
         if (is_array($result_person_year)) {
+      
             foreach ($result_person_year as $rs_py) {
                 switch ($rs_py['jobtype_id']) {
                     //sluzba
@@ -97,7 +98,7 @@ if (!$LOG) {
                         $LOG[$person_id_db]["working_days_all"] +=1;
                         $LOG[$person_id_db]["working_hours_all"] += ( ($day_r['end'] - $day_r['start']));
                         //echo "SLUZBA!!";
-
+ 
                         break;
 
                     //izobra�evanje//
@@ -208,7 +209,8 @@ if (!$LOG) {
         $result_day = $db->fetchAll($sql);
         if (is_array($result_day))
             foreach ($result_day as $day_r) {
-                //echo $day_r['jobtype_id']."<br>";
+           
+            //echo $day_r['jobtype_id']."<br>";
                 switch ($day_r['jobtype_id']) {
                     //sluzba
                     case "1":
@@ -245,7 +247,7 @@ if (!$LOG) {
 
                     //Sluzbeno potovanje//
                     case "11":
-                        $LOG[$person_id_db]["mission"] +=1;
+                        $LOG[$person_id_db]["mission"] +=1;                       
                         $LOG[$person_id_db]["mission_hours"] += ( ($day_r['end'] - $day_r['start']));
                         break;
 

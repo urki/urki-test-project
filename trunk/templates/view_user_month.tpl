@@ -2,6 +2,9 @@
   <tr>
     <td bordercolor="#CCCCCC" bgcolor="#999999" class="text"><div align="center"><span class="style4">Ime in Priimek</span></div></td>
     <td  bgcolor="#999999" class="text"><div align="center"><span class="style4">Delovnih dni</span></div></td>
+
+  <td  bgcolor="#999999" class="text"><div align="center"><span class="style4">Službeno potovanje</span></div></td>
+
     <td  bgcolor="#999999" class="text"><div align="center"><span class="style4">Dopust dni</span></div></td>
     <td  bgcolor="#999999" class="text"><div align="center"><span class="style4">Izr. dopust</span></div></td>
     <td  bgcolor="#999999" class="text"><div align="center"><span class="style4">&#352;tud. dopust</span></div></td>
@@ -23,6 +26,11 @@
 <tr>
     <td width="140" class="text" align="center"  >##FIRST## ##LAST##</td>
     <td class="text" align="center" >##WORKING_DAYS##</td>
+
+
+  <td class="text" align="center" >##MISSION_DAYS##</td>
+
+
     <td class="text" align="center" >##HOLIDAY_DAYS##</td>
     <td class="text" align="center">##SPECIALEAVE##</td>
     <td class="text" align="center">##SABBATICAL##</td>

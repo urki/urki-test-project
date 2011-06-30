@@ -9,8 +9,7 @@ $TITLE = "Evidenca prisotnosti";
 $tem = template_open("index.tpl");
 $tem = template_add_head_foot($tem, head, foot);
 
-
-
+      
 //trenutni mesec
 $mesec_start = date("m", time());
 $year=date("Y", time());
@@ -27,6 +26,30 @@ $ehour_dropdown = html_drop_down_arrays("ehour_drop", $ehour, $ehour, "15");
 
 $emin = range(0, 59);
 $emin_dropdown = html_drop_down_arrays("emin_drop", $emin, $emin, $emin_drop);
+
+
+
+////
+//$spremenljivka="active";
+//try {
+//    $testiranje = $dal->get_active_person_data_from_Rfid_by_rfid_status(5,'active');
+//    foreach ($testiranje as $testi){
+//        var_dump($testiranje);                   //print_r($testi);
+//                       // echo "<hr>";
+//
+//                    }
+//} catch (Exception $e)
+//{
+//    echo 'Caught exception: ',  $e->getMessage(), "\n";
+//    var_dump($e->getMessage());
+//}
+
+                 
+
+
+
+
+
 
 
 

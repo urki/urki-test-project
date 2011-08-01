@@ -37,18 +37,38 @@ class DAL {
         return $this->query($sql);
     }
 
+ //
 
+//RfidRawLOG
 
-
+    public function get_data_from_rfidrawlog_by_person($person_id){
+        $sql = "SELECT * FROM RfidRawLog where person_id=$person_id  order by timestamp desc limit 0, 1";
+       return $this->query($sql);
+        //var_dump($sql);
+    }
 //Rfid querys
     public function get_active_person_data_from_Rfid_by_rfid_status($rfid,$status) {
-        $sql= "SELECT * FROM `Rfid` left join persons on person_id=id_person where rfid=$rfid and status='$status'";
+        $sql= "SELECT * FROM `Rfid` left join persons on person_id=id_person where rfid='$rfid' and status='$status'";
+     //var_dump($sql);
+
         return $this->query($sql);
     }
 
     //Person without or not active rfid
-     public function get_active_person_data_from_Rfid_by_rfid_status2($rfid,$status) {
-        $sql= "SELECT * FROM `Rfid` right join persons on person_id=id_person where rfid=$rfid and status='$status'";
+     public function get_active_person_data_from_Rfid_by_rfid_disabled() {
+        $sql= "select id_person, last, first from persons right join
+               ((select person_id
+                 from Rfid where
+                            person_id   not in (
+                                                SELECT distinct person_id FROM `Rfid`
+                                                Where  status ='active')
+                                                group by  `person_id` )
+                 UNION
+                (select id_person from persons where rfid_id=0
+               ))unionVseh
+               on id_person=person_id  limit 0,3";
+       
+      
         return $this->query($sql);
     }
     //Person without or not active rfid
@@ -57,7 +77,7 @@ class DAL {
         var_dump($sql);
         return $this->query($sql);
     }
-
+/////////////////////////////////
     public function get_count_dissorder_age_persons_by_unit($unit_in, $role_id_min, $role_id_max, $age_min, $age_max, $disorder_id) {
         $sql = "SELECT  count(`id_person`) as sestevek
                FROM `persons` left join DisorderLog on DisorderLog.person_id=persons.id_person

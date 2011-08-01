@@ -66,7 +66,7 @@ class DAL {
                  UNION
                 (select id_person from persons where rfid_id=0
                ))unionVseh
-               on id_person=person_id  limit 0,3";
+               on id_person=person_id where id_role>40 order by letter  limit 0,3";
        
       
         return $this->query($sql);

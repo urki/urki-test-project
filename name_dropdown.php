@@ -3,9 +3,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+//$unit=78;
 $names ="";
 $values = "";
-$sql = "SELECT * FROM persons WHERE $ROLE_USER>=`id_role` order by letter ASC";
+$sql = "SELECT * FROM persons WHERE $ROLE_USER>=`id_role` and unit=$unit order by letter ASC";
+//var_dump($sql);
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
 

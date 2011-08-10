@@ -52,7 +52,7 @@ $year_dropdown = html_drop_down_arrays("year_drop", $year, $year, date("Y", time
     //
     //nosilec drop down
     //
-$sql = "SELECT * FROM `persons` WHERE  20<`id_role` order by unit, letter ASC";
+$sql = "SELECT * FROM `persons` WHERE  20<`id_role` and unit=$unit order by unit, letter ASC";
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
     if (!is_array($ResponsibleName)) {
@@ -81,7 +81,7 @@ $last_add_user_id = $db->fetchOne($sql);
 
 
 //person drop down
-$sql = "SELECT * FROM `persons` WHERE `id_role`<'11'";
+$sql = "SELECT * FROM `persons` WHERE `id_role`<'11 and unit=$unit'";
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
     if (!is_array($PersonName)) {

@@ -31,9 +31,34 @@ class DAL {
 //yearly report
 //get number of disorder people by unit and by reole id
 
+
+
+ //Aims querys
+    public function get_data_from_aim_order_by_id_desc() {
+        $sql="select * from aim order by id desc";
+        return $this->query($sql);
+    }
+
+
+
+ //Log querys
+ public function get_data_from_log_by_job_and_person($jobtype_id, $person_id){
+     $sql="SELECT *
+           FROM `log`
+           WHERE `jobtype_id` =$jobtype_id
+                  AND `person_id` =$person_id
+           order by `log_id` desc
+           ";
+    // var_dump($sql);
+     return $this->query($sql);
+ }
+
+
 //Persons Query
-     public function get_person_data_from_persons() {
-        $sql= "SELECT * FROM persons";
+
+     public function get_person_data_from_persons_by_person_id($person_id) {
+        $sql= "SELECT * FROM persons
+               WHERE id_person=$person_id";
         return $this->query($sql);
     }
 
@@ -259,41 +284,13 @@ class DAL {
 
         global $db;
 
-//$db = $this->dbconnect();
 
-        $res = $db->FetchAll($sql);
+    
+                $res = $db->FetchAll($sql);
+
+
         return $res;
 
-        /*
-          if ($res){
-          if (strpos($sql,'SELECT') === false){
-          return true;
-          }
-          }
-          else{
-          if (strpos($sql,'SELECT') === false){
-          return false;
-          }
-          else{
-          return null;
-          }
-          }
-
-          $results = array();
-
-          while ($row = mysql_fetch_array($res)){
-
-          $result = new DALQueryResult();
-
-          foreach ($row as $k=>$v){
-          $result->$k = $v;
-          }
-
-          $results[] = $result;
-          }
-          return $results;
-
-         */
     }
 
 }

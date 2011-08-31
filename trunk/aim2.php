@@ -22,7 +22,8 @@ $styleHidden = "class='hide'";
 
 //print_r($person_data['id_person']);
 if ($_REQUEST['prikazi']) {
-    $person_data=$dal->get_person_data_from_persons_by_person_id($name_drop);
+    $name_drop=3;
+$person_data=$dal->get_person_data_from_persons_by_person_id($name_drop);
     $person_data=$person_data[0];
     $first=$person_data[first];
     $last=$person_data[last];

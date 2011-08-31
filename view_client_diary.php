@@ -46,10 +46,10 @@ if (!$year)
 if ($role_id < $ROLE_LEADER) {
     $sql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where id$id and `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and `assessor_id`>0 and `assessor_id`=$person_id and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year order by datum desc, letter, ime_varov,  zacetek ";
    
-    echo $sql;
+    //echo $sql;
 } elseif ($role_id < $ROLE_ADMIN and $role_id > $ROLE_LEADER) {
     $sql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where id$id and `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and `assessor_id`>0 and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year order by datum desc, letter, ime_varov, zacetek";
-    echo $sql;
+   // echo $sql;
 //    $sql = "SELECT *
 //FROM (
 //
@@ -100,19 +100,19 @@ if ($role_id < $ROLE_LEADER) {
 
 
 
-    echo $sql;
+    //echo $sql;
 }
 
 //echo $sql;
 
 $result = $db->fetchAll($sql);
 
-$time2 = time();
+//$time2 = time();
 $x=0;
 //log_id	timestamp	person_id	jobtype_id	start	end	note	job_id	name	description
 foreach ($result as $res) {
     $x=$x+1;
-    $time4=microtime();
+   // $time4=microtime();
     $table.= $row;
 
     //echo $table."<br><hr>";
@@ -123,9 +123,9 @@ foreach ($result as $res) {
     $table = str_replace("##STOP##", $res["konec"], $table);
     $table = str_replace("##NAME##", $res["name"], $table);
     $table = str_replace("##DESCRIPTION##", $res["comm"], $table);
-    $time5=microtime();
-    $time54=$time5-$time4;
-    echo "$x. krog je trajal $time54 <hr>";
+   // $time5=microtime();
+    //$time54=$time5-$time4;
+   // echo "$x. krog je trajal $time54 <hr>";
    // $table = str_replace("##ASSESSOR##", $res["asslast"] . " " . $res["assfirst"], $table);
     //echo "<br>".$res['timestamp']." - ".date("H:i",$res['start'])." - ".date("H:i",$res['stop'])." - ".$res['name']." - ".$res['description'];
    // $whole_table.=$table;
@@ -140,10 +140,10 @@ $tem = str_replace('##TITLE##', $TITLE, $tem);
 $tem = str_replace("##LOGS##", $table, $tem);
 $tem = str_replace("##MESSAGE##", $message, $tem);
 $tem = template_clean_up_tags($tem, "##");
-$time3 = time();
-$timeque=$time2-$time;
-$timeres=$time3-$time2;
-echo "<hr>cas query:$timeque<hr>";
-echo "<hr>cas pisanja:$timeres<hr>";
+//$time3 = time();
+//$timeque=$time2-$time;
+//$timeres=$time3-$time2;
+//echo "<hr>cas query:$timeque<hr>";
+//echo "<hr>cas pisanja:$timeres<hr>";
 
 echo $tem;

@@ -17,3 +17,4 @@ foreach ($result as $res) {
 $name_dropdown = html_drop_down_arrays("name_drop",$names,$values,$name_drop);
 
 $tem = str_replace("##NAME_DROP##",$name_dropdown,$tem);
+

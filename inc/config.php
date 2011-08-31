@@ -49,9 +49,10 @@ if ($auth->hasIdentity()) {
 }
 //$BASE_DIR="/Users/samek/Sites/komplet";
 //$BASE_DIR="/Applications/MAMP/htdocs/komplet/";
-//$BASE_DIR="/home/uros/Projects/intranetDevelop";
+$BASE_DIR="/home/uros/Projects/intranetDevelop";
+//$BASE_DIR="/home/uros/Projects/NEWintranetDevelop";
 //$BASE_DIR="/var/www/komplet";
-$BASE_DIR="/var/www/intranet2";
+//$BASE_DIR="/var/www/intranet2";
 $TEMPLATE_DIR=$BASE_DIR."/templates/";
 
 

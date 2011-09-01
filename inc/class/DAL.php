@@ -42,16 +42,20 @@ class DAL {
 
 
  //Log querys
- public function get_data_from_log_by_job_and_person($jobtype_id, $person_id){
+ 
+ //used in evidencaVDC Action
+ public function get_data_from_log_by_job_and_person_and_modified($jobtype_id, $person_id, $modified_by = '!=""'){
      $sql="SELECT *
            FROM `log`
            WHERE `jobtype_id` =$jobtype_id
-                  AND `person_id` =$person_id
+                  AND `person_id` =$person_id 
+                  AND 'modified_by' $modified_by
            order by `log_id` desc
            ";
     // var_dump($sql);
      return $this->query($sql);
  }
+
 
 
 //Persons Query

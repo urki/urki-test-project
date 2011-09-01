@@ -13,6 +13,8 @@ require_once 'string.php';
 // Include DAL class for querys
 require_once(dirname(dirname(__FILE__)) . '/inc/class/DAL.php');
 
+//require_once('inc/class/DAL.php');
+
 
 
     $dal=new DAL();

@@ -49,7 +49,7 @@ class DAL {
            FROM `log`
            WHERE `jobtype_id` =$jobtype_id
                   AND `person_id` =$person_id 
-                  AND 'modified_by'=$modified_by
+                  AND 'note'$modified_by
            order by `log_id` desc
            ";
     //var_dump($sql);

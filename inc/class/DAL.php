@@ -31,18 +31,42 @@ class DAL {
 //yearly report
 //get number of disorder people by unit and by reole id
 
-
-
- //Aims querys
-    public function get_data_from_aim_order_by_id_desc() {
-        $sql="select * from aim order by id desc";
+ 
+   
+ 
+    /**
+	* Aims querys
+	* 
+	* Query for getting data from aim entity ordered by id descending for getting aims
+	* Query:
+	*
+    *{@source 3 3}
+    *@see DAL::get_person_data_from_persons_by_person_id()
+        */     
+        public function get_data_from_aim_order_by_id_desc() {
+        $sql="
+         select * 
+         from aim 
+         order by id desc";
         return $this->query($sql);
     }
 
 
 
- //Log querys
+  
  
+
+   /**
+	* Log querys
+	* 
+	* Query to get person from log entity by person id. It is used in evidencaVDC action.php
+	* Query:
+	*
+    *{@source 3 6}
+    *@see 
+   */  
+
+
             //used in evidencaVDC Action
  public function get_data_from_log_by_job_and_person_and_modified($jobtype_id, $person_id, $modified_by = "!=''"){
      $sql="SELECT *

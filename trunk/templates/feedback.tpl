@@ -1,5 +1,11 @@
 <form action="feedback.php" method="post" accept-charset="utf-8">
-  <table width="688" border="0" cellpadding="0" cellspacing="0" bordercolor="#333333">
+    <div class="span-16" id="addlogadmin">
+        <div class="push-1">
+            <fieldset class="shadowcontainer">
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                    
+                         <table width="688" border="0" cellpadding="0" cellspacing="0" bordercolor="#333333">
     <col valign="middle" />
     <col valign="middle" />
     <tr>
@@ -42,5 +48,22 @@
       <td bgcolor="#FFFFCC" class="text">&nbsp;</td>
       <td bgcolor="#FFFFCC" class="text">&nbsp;</td>
     </tr>
-  </table>
-  </form>
+ </form>                                                   
+                    </tr>         
+                </table>
+            </fieldset>
+        </div>
+
+
+    </div>
+</form>
+<script type="text/javascript">
+    document.addlog.shour_drop.focus();
+</script>
+
+
+
+
+
+
+ 

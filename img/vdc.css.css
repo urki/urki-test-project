@@ -102,3 +102,21 @@ insert:link {color:#FF0000;}      /* unvisited link */
 insert:visited {color:#00FF00;}  /* visited link */
 insert:hover {color:#FF00FF;}  /* mouse over link */
 insert:active {color:#0000FF;}  /* selected link */
+
+#wrapper span.highlight { color: #F48A00; }
+
+
+p.normal::selection {
+  background:#cc0000;
+  color:#fff;
+}
+
+p.moz::-moz-selection {
+  background:#cc0000;
+  color:#fff;
+}
+
+p.webkit::-webkit-selection {
+  background:#cc0000;
+  color:#fff;
+}

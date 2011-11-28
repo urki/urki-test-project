@@ -3,9 +3,9 @@
 //*$DO_NOT_REDIRECT="true";*/
 require_once("inc/config.php");
 check_role($ROLE_LEADER);
-$tem = template_open("add_log_admin.tpl");
+$tem = template_open("add_permit.tpl");
 $tem = template_add_head_foot($tem, head, foot);
-$TITLE = "Evidenca OE";
+$TITLE = "Dovolilnice";
 
 $year_drop = date("Y");
 

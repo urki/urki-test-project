@@ -4,7 +4,7 @@ require_once("inc/config.php");
 
 check_role($ROLE_LEADER);
 
-
+$TITLE = "Grafično poročilo zap.";
 $tem = template_open("view_report.tpl");
 $tem = template_add_head_foot($tem,head,foot);
 
@@ -44,7 +44,7 @@ $year_dropdown = html_drop_down_arrays("year",$names,$values,date("Y",time()));
 /* get names */
 $names ="";
 $values = "";
-$sql = "SELECT * FROM persons WHERE id_role>10 order by letter ASC"; 
+$sql = "SELECT * FROM persons WHERE id_role>10 AND unit>0 order by letter ASC"; 
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
 
@@ -76,10 +76,12 @@ if ($mon and $year and $name_drop) {
 		//potem prikazemo samo za leto 
 		$params = str_replace("##PERIOD##",$year,$params);
 		$params = str_replace("##SUBTITLE##","za leto $year",$params);
+                $titleDate='za '.$year;
 	} else {
 		//potem prikazemo za mesec in leto 
 		$params = str_replace("##PERIOD##",$mon.$year,$params);
 		$params = str_replace("##SUBTITLE##","za mesec $mon - $year",$params);
+                $titleDate=$mon."/".$year;
 	}
 	$params = str_replace("##TYPE_Q##",4,$params);
 	$whole_table = str_replace("##PARAMS##",urlencode($params),$whole_table);
@@ -92,7 +94,8 @@ $tem = str_replace("##AMOUNT##",$amount,$tem);
 $tem = str_replace("##YDROP##",$year_dropdown,$tem);
 $tem = str_replace("##MDROP##",$month_dropdown,$tem);
 $tem = str_replace("##NAME_DROP##",$name_dropdown,$tem);
-$tem = str_replace("##MONTH##"," ".$mon."/".$year,$tem); //v header sem dal zraven naslova izpis meseca za katerega je izpis
+//$tem = str_replace("##MONTH##"," ".$mon."/".$year,$tem); //v header sem dal zraven naslova izpis meseca za katerega je izpis
+$tem = str_replace("##MONTH##"," ".$titleDate,$tem);
 $tem = str_replace('##USER##',$identity,$tem);
 $tem = str_replace('##TITLE##',$TITLE,$tem);
 $tem = str_replace("##LOGS##",$whole_table,$tem);

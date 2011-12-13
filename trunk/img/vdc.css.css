@@ -93,6 +93,7 @@ root {
 }
 
 h1 {
+font-family: 'Tenor Sans', sans-serif;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.60);
     background-color: transparent;
 }

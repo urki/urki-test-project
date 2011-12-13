@@ -1,10 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 
-
+        <link href='http://fonts.googleapis.com/css?family=Tenor+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="img/screen.css" type="text/css" media="screen, projection"/>
         <link rel="stylesheet" href="img/print.css" type="text/css" media="print"/>
         <link rel="stylesheet" href="img/vdc.css.css" type="text/css" media="screen, projection"/>
+
 
         <!--[if lt IE 8]><link rel="stylesheet" href="img/ie.css"
         type="text/css" media="screen, projection"><![endif]-->

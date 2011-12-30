@@ -19,6 +19,16 @@ $qmonth_dropdown = html_drop_down_arrays("month_drop", $qmonth, $qmonth, $month_
 $qday = range(1, 31);
 $qday_dropdown = html_drop_down_arrays("day_drop", $qday, $qday, $day_drop);
 
+$fyear = range(2009, (date("Y", time())) + 1);
+$from_year_dropdown = html_drop_down_arrays("fyear_drop", $fyear, $fyear, $year_drop);
+
+$fmonth = range(1, 12);
+$from_month_dropdown = html_drop_down_arrays("fmonth_drop", $fmonth, $fmonth, $fmonth_drop);
+
+$fday = range(1, 31);
+$from_day_dropdown = html_drop_down_arrays("fday_drop", $fday, $fday, $fday_drop);
+
+
 
 $shour = range(0, 23);
 $shour_dropdown = html_drop_down_arrays("shour_drop", $shour, $shour, $shour_drop);
@@ -146,9 +156,15 @@ $tem = str_replace('##SHOUR##', $shour_dropdown, $tem);
 $tem = str_replace('##SMIN##', $smin_dropdown, $tem);
 $tem = str_replace('##EHOUR##', $ehour_dropdown, $tem);
 $tem = str_replace('##EMIN##', $emin_dropdown, $tem);
-$tem = str_replace('##ADAY##', $qday_dropdown, $tem);
-$tem = str_replace('##AMONTH##', $qmonth_dropdown, $tem);
-$tem = str_replace('##AYEAR##', $qyear_dropdown, $tem);
+
+$tem = str_replace('##DAYTO##', $qday_dropdown, $tem);
+$tem = str_replace('##MONTHTO##', $qmonth_dropdown, $tem);
+$tem = str_replace('##YEARTO##', $qyear_dropdown, $tem);
+
+$tem = str_replace('##DAYFROM##', $from_day_dropdown, $tem);
+$tem = str_replace('##MONTHFROM##', $from_month_dropdown, $tem);
+$tem = str_replace('##YEARFROM##', $from_year_dropdown, $tem);
+
 $tem = str_replace('##TITLE##', $TITLE, $tem);
 $tem = str_replace('##USER##', $identity, $tem);
 $tem = str_replace("##JOB_DROP##", $job_dropdown, $tem);

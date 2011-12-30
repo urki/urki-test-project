@@ -1,7 +1,5 @@
 
-
-
-<form name=addlog id=addlog action="add_log_admin.php" method="post" accept-charset="utf-8">
+<form name=addlog id=addlog action="add_permit.php" method="post" accept-charset="utf-8">
 
 
 
@@ -25,15 +23,23 @@
                     </tr>
                     <tr>
                         <td>
-                            Datum:
+                            Datum začetka:
                         </td>
                         <td>
-                            ##ADAY## / ##AMONTH## / ##AYEAR##
+                            ##DAYFROM## / ##MONTHFROM## / ##YEARFROM##
                         </td>
+                        <tr>
+                           <td>
+                            Datum konca:
+                        </td>
+                         <td>
+                            ##DAYTO## / ##MONTHTO## / ##YEARTO##
+                         </td>
+                        </tr>
                     </tr>
                     <tr>
                         <td class="barva">
-                            Čas začetka:
+                            Čas začetka(hh:min):
                         </td>
                         <td>
                             ##SHOUR## : ##SMIN##
@@ -41,7 +47,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Čas konca:
+                            Čas konca(hh:min):
                         </td>
                         <td>
                             ##EHOUR## : ##EMIN##

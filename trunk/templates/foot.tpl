@@ -1,10 +1,10 @@
 <hr>
 <div class="push-1" id="footer">
 
-##IF_EMPLOYED##<a href="index.php" class="text"><b>Evidenca prisotnosti</b></a>
-        ##IF_LEADER##  | <a href="add_log_admin.php" class="text"><b>Evidenca OE</b></a>
-        ##IF_LEADER## 
-   | <a href="aktivnosti.php" class="text"><B>Aktivnosti</B></a>
+##IF_EMPLOYED####IF_ZALEC##<a href="add_person_log.php" class="text"><b>Evidenca prisotnosti</b></a>##IF_ZALEC##
+        ##IF_LEADER## ##IF_ZALEC## | <a href="add_log_admin.php" class="text"><b>Evidenca OE</b></a>
+       ##IF_LEADER## 
+   |##IF_ZALEC## <a href="aktivnosti.php" class="text"><B>Aktivnosti</B></a> 
 ##IF_EMPLOYED##
 ##IF_LEADER####IF_LEADER##
 ##IF_ADMIN####IF_ADMIN## 

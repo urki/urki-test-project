@@ -1,5 +1,7 @@
-<?
 
+<?
+header("location:aktivnosti.php");
+/*
 $DO_NOT_REDIRECT="false";
 require_once("inc/config.php");
 check_role($ROLE_EMPLOYED, "login.php");
@@ -86,7 +88,7 @@ if ($_REQUEST['add'] == "   Shrani    ") {
 
 
 ///testiramo če se vpis prekriva z katerim vpisom in če so vsa polja izpolnjena
-        if ($person_id and /* $name_dropdown and $job_dropdown and */ $start_time and $stop_time and ($start_time < $stop_time)) {
+        if ($person_id and  $start_time and $stop_time and ($start_time < $stop_time)) {
             $sql = "SELECT timestamp FROM log  where person_id = '$person_id'  and  (end >'$start_time' AND start<'$stop_time')";
             $result = $db->fetchOne($sql);
             if (!$result) {
@@ -135,4 +137,5 @@ $tem = str_replace("##NAME_DROP##", $name_dropdown, $tem);
 $tem = str_replace("##MESSAGE##", $message, $tem);
 $tem = template_clean_up_tags($tem, "##");
 echo $tem;
+*/
 ?>

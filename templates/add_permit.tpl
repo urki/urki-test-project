@@ -1,4 +1,6 @@
 
+
+
 <form name=addlog id=addlog action="add_permit.php" method="post" accept-charset="utf-8">
 
 
@@ -14,32 +16,25 @@
                 <table cellpadding="0" cellspacing="0">
 
                     <tr>
-                        <td>
+                    ##IF_LEADER##                        <td>
                             Ime, priimek:
                         </td>
                         <td>
                             ##NAME_DROP##
                         </td>
+                        
                     </tr>
-                    <tr>
+                    ##IF_LEADER##                    <tr>
                         <td>
-                            Datum začetka:
+                            Datum:
                         </td>
                         <td>
-                            ##DAYFROM## / ##MONTHFROM## / ##YEARFROM##
-                        </td>
-                        <tr>
-                           <td>
-                            Datum konca:
-                        </td>
-                         <td>
                             ##DAYTO## / ##MONTHTO## / ##YEARTO##
-                         </td>
-                        </tr>
+                        </td>
                     </tr>
                     <tr>
                         <td class="barva">
-                            Čas začetka(hh:min):
+                            Čas začetka:
                         </td>
                         <td>
                             ##SHOUR## : ##SMIN##
@@ -47,7 +42,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Čas konca(hh:min):
+                            Čas konca:
                         </td>
                         <td>
                             ##EHOUR## : ##EMIN##
@@ -74,7 +69,7 @@
                             <input name="add" id="add" value="    Dodaj    " type="submit">
                         </td>
                         <td>
-                            <input type=button onClick="location.href='add_log_admin.php'" value='Izbriši vse'>
+                            <input type=button onClick="location.href='add_permit.php'" value='Izbriši vse'>
                         </td>
 
                     </tr>

@@ -2,10 +2,58 @@
 
 //*$DO_NOT_REDIRECT="true";*/
 require_once("inc/config.php");
-check_role($ROLE_LEADER);
+//check_role($ROLE_LEADER);
+check_role($ROLE_EMPLOYED);
+
 $tem = template_open("add_permit.tpl");
 $tem = template_add_head_foot($tem, head, foot);
-$TITLE = "Dovolilnice";
+$TITLE = "Vloge";
+
+
+
+//Za izpis tistih katere hočem videti  - to moram prestavit v funkcijo!!!!!!!
+
+if ($role_id) {
+
+    switch ($role_id) {
+
+        case ($role_id >= $ROLE_ADMIN):
+            $tem = template_clean_up_tags($tem, "##IF_BUT_ADMIN##", 1);
+            $tem = str_replace("##IF_ADMIN##", "", $tem);
+            $tem = str_replace("##IF_LEADER##", "", $tem);
+            $conditionUnit="";//to be in that unit
+            break;
+
+        case ($role_id < $ROLE_ADMIN and $role_id >= $ROLE_LEADER):
+            $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
+            $tem = str_replace("##IF_BUT_LEADER##", "", $tem);
+             $conditionUnit="and unit=$unit";//to be in that unit
+            break;
+
+        case ($role_id < $ROLE_LEADER and $role_id >= $ROLE_EMPLOYED):
+            $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
+            $tem = template_clean_up_tags($tem, "##IF_LEADER##", 1);
+            $tem = str_replace("##IF_BUT_LEADER##", "", $tem);
+             $conditionUnit="and unit=$unit";//to be in that unit
+            break;
+
+        default:
+
+            $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
+            $tem = template_clean_up_tags($tem, "##IF_LEADER##", 1);
+            $tem = template_clean_up_tags($tem, "##IF_EMPLOYED##", 1);
+        //$tem =  template_clean_up_tags($tem,"##IF_ZALEC##",1);
+    }
+} else {
+
+    $tem = template_clean_up_tags($tem, "##IF_ZALEC##", 1);
+    $head = template_clean_up_tags($head, "##IF_USER##", 1);
+    $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
+    $tem = template_clean_up_tags($tem, "##IF_LEADER##", 1);
+    $tem = template_clean_up_tags($tem, "##IF_EMPLOYED##", 1);
+}
+
+
 
 $year_drop = date("Y");
 
@@ -48,14 +96,22 @@ $emin_dropdown = html_drop_down_arrays("emin_drop", $emin, $emin, $emin_drop);
 //pogoj, da lahko vsi ki imajo nad 80 role_id vidijo vse in dopisujejo vse
 if ($role_id < 80) {
     $sql = "SELECT * FROM persons where unit=$role_id and id_role>30 order by last ASC";
-} else {
+} 
+else {
     $sql = "SELECT * FROM persons where id_role>30 order by first ASC";
 }
+
+//pogoj, da se vpiše sam če ima role id <70
+if ($role_id < 70) {
+   $name_drop= $person_id; 
+   }
+  
+
 
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
     if (!is_array($names)) {
-        $names[] = "ime in priimek zaposlenega...";
+        $names[] = "ime in priimek zaposlenega…";
         $values[] = "";
     }
     $names[] .= $res["first"] . " " . $res["last"];
@@ -77,7 +133,7 @@ $sql = "SELECT * FROM jobtype where role between 10 and $role_id order by name A
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
     if (!is_array($names_job)) {
-        $names_job[] = "izberi tip...";
+        $names_job[] = "izberi tip…";
         $values_job[] = "";
     }
     $names_job[] .= $res["name"];
@@ -91,12 +147,12 @@ $name = $_REQUEST['name'];
 
 if ($_REQUEST['add'] == "    Dodaj    ") {
     if (!$name_drop) {
-         $messagetype="notice";
+        $messagetype = "notice";
         $message.= "Izberi ime in priimek!";
     } else {
         $start_time = mktime($shour_drop, $smin_drop, 0, $month_drop, $day_drop, $year_drop);
         $stop_time = mktime($ehour_drop, $emin_drop, 0, $month_drop, $day_drop, $year_drop);
-
+        $date = $year_drop . '-' . $month_drop . '-' . $day_drop;
         //pridobi enoto osebe katero vpisujem
         $sql_temp = "SELECT unit FROM persons where $name_drop=id_person";
         $enroll_unit = $db->fetchOne($sql_temp);
@@ -113,30 +169,97 @@ if ($_REQUEST['add'] == "    Dodaj    ") {
         $get_log = $db->fetchAll($sql_log);
         if ($get_log[0]["date"]) {
             //header("location:log_error.php");
-            $messagetype="error";
+            $messagetype = "error";
             $message .= "Vna&#353ati v mesec katerega poro&#269ilo je bilo oddano ni mogo&#269e!";
             //exit;
         } else {
 
 
             if ($job_drop and $month_drop and $day_drop and $start_time and $stop_time and ($start_time < $stop_time)) {
-                $sql = "SELECT timestamp FROM log  where jobtype_id=$job_drop and person_id = '$name_drop'  and  (end >'$start_time' AND start<'$stop_time')";
+                $sql = "SELECT timestamp FROM working_time  
+                         where jobtype_id=$job_drop 
+                          and person_id = '$name_drop'  
+                          and  unix_timestamp(concat(valid_from, ' ', minStart)) >'$start_time' 
+                          AND unix_timestamp(concat(valid_to, ' ', maxEnd))<'$stop_time'";
+
                 $result = $db->fetchOne($sql);
                 if (!$result) {
 
 
-                    //dejansko vnesemo
-                    $data = array(
-                        'person_id' => $name_drop, //name_drop sem zamenjal z user_id saj se avtomatsko...
-                        'jobtype_id' => $job_drop,
-                        'start' => $start_time,
-                        'end' => $stop_time,
-                        'note' => $note . " " . "//dodal" . " " . $identity,
-                        'modified_by' => $person_id
-                    );
-                    $db->insert('log', $data);
-                    $messagetype = "success";
-                    $message .= "Vnos je dodan";
+                    $sql3 = "SELECT * 
+                             FROM  `working_time` 
+                             WHERE( '$date' between `valid_from` and `valid_to`) and  `person_id` =$name_drop
+                             and DayOfWeek=dayofweek('$date')
+                             ORDER BY id DESC 
+                             LIMIT 0 , 1";
+                    $result = $db->fetchAll($sql3);
+
+                    if ($result) {
+
+                        foreach ($result as $res) {
+                            $weekday = $res["DayOfWeek"];
+                            
+                            $maxJobTime = $res["maxJobTime"];
+                            
+                            $workingTime = $res["workingTime"];
+                        }
+
+
+
+                       $now=date("Y-m-d H:i:s");
+                        //dejansko vnesemo
+                        $data = array(
+                            'timestamp' =>$now,
+                            'person_id' => $name_drop, //name_drop sem zamenjal z user_id saj se avtomatsko…
+                            'jobtype_id' => $job_drop,
+                            'valid_from' => $year_drop . '-' . $month_drop . '-' . $day_drop,
+                            'valid_to' => $year_drop . '-' . $month_drop . '-' . $day_drop,
+                            'minStart' => $shour_drop . ':' . $smin_drop . ':00',
+                            'maxEnd' => $ehour_drop . ':' . $emin_drop . ':00',
+                            'DayOfWeek' => $weekday,
+                            'EvenOrOddWeek' => 'all',
+                            'maxJobTime' => $maxJobTime,
+                            'workingTime' => $workingTime,
+                            'note' => $note . " " . "//dodal" . " " . $identity
+                        );
+                        $db->insert('working_time', $data);
+                        $messagetype = "success";
+                        $message .= "Vloga je oddana";
+                        
+                       
+                         //vpis v status entiteto:
+                          $stime=  $shour_drop . ':' . $smin_drop . ':00';
+                          $etime= $ehour_drop . ':' . $emin_drop . ':00';
+                           $sql = "SELECT * 
+                             FROM  `working_time` 
+                             WHERE timestamp='$now' and `person_id` =$name_drop  and jobtype_id='$job_drop'                     
+                             ORDER BY id DESC 
+                             LIMIT 0 , 1";
+                            
+                           $result = $db->fetchAll($sql3);
+
+                           if (!$result) {
+                             $messagetype = "error";
+                        $message .= "Napaka pri zapisu. Obvestite administratorja!";
+                                                   }   
+
+                        foreach ($result as $res) {
+                            $workingTime_id = $res["id"];
+                        }
+                        
+                           $data = array(
+                             'workingTime_id' =>  $workingTime_id,
+                              'id_approver'=> $name_drop,
+                              'status' => '0'
+                        );                         
+                        $db->insert('working_time_status', $data);                        
+                        
+                    } else {
+
+
+                        $messagetype = "error";
+                        $message .= "Zaposleni mora imeti vsaj osnovni vnos delovnega časa. Obvestite administratorja!";
+                    }
                 } else {
                     $messagetype = "error";
                     $message.="Vpis se prekriva!";

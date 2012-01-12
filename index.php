@@ -1,10 +1,13 @@
 
 <?
-header("location:aktivnosti.php");
-/*
+
+
 $DO_NOT_REDIRECT="false";
 require_once("inc/config.php");
 check_role($ROLE_EMPLOYED, "login.php");
+header("location:aktivnosti.php");
+exit;
+/*
 $TITLE = "Evidenca prisotnosti";
 
 

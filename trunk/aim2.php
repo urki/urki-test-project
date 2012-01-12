@@ -53,8 +53,12 @@ $year_dropdown = html_drop_down_arrays("year_drop", $year, $year, date("Y", time
     //
     //nosilec drop down
     //
-$sql = "SELECT * FROM `persons` WHERE  20<`id_role` and unit=$unit order by unit, letter ASC";
+
+$sql = "SELECT * FROM `persons` WHERE  20<`id_role` and unit $unit order by unit, letter ASC";
+//var_dump($sql);
+//echo "A tu se dela?"; TO jke drek od ovce ša sploh pšrogfaf fd shsdrt sdrhtf
 $result = $db->fetchAll($sql);
+
 foreach ($result as $res) {
     if (!is_array($ResponsibleName)) {
         $ResponsibleName[] = "izberi..";

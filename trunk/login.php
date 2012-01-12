@@ -41,7 +41,7 @@ if ($user and $pass) {
 		echo $tem;
 	} else {
                 
-		header("location:index.php");
+		header("location:aktivnosti.php");
 	       
         }
 } else {

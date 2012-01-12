@@ -93,21 +93,21 @@ $emin_dropdown = html_drop_down_arrays("emin_drop", $emin, $emin, $emin_drop);
 
 
 
-//pogoj, da lahko vsi ki imajo nad 80 role_id vidijo vse in dopisujejo vse
-if ($role_id < 80) {
-    $sql = "SELECT * FROM persons where unit=$role_id and id_role>30 order by last ASC";
-} 
-else {
-    $sql = "SELECT * FROM persons where id_role>30 order by first ASC";
-}
+
 
 //pogoj, da se vpiše sam če ima role id <70
 if ($role_id < 70) {
    $name_drop= $person_id; 
    }
-  
 
-
+ 
+ //pogoj, da lahko vsi ki imajo nad 80 role_id vidijo vse in dopisujejo vse
+if ($role_id < 80) {
+    $sql = "SELECT * FROM persons where unit=$role_id and id_role>30 order by last ASC";
+} 
+else {
+    $sql = "SELECT * FROM persons where id_role>30 order by first ASC";
+} 
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
     if (!is_array($names)) {

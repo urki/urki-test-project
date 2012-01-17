@@ -16,6 +16,12 @@ $tem = template_add_head_foot($tem, "head", "foot");
 include 'name_dropdown.php';
 
 
+$beginDate=isset($beginDate);
+if (!$beginDate) {
+    $beginDate=date("Y-m-d");
+}
+
+
 
 $styleHidden = "class='hide'";
 
@@ -38,6 +44,8 @@ $person_data=$dal->get_person_data_from_persons_by_person_id($name_drop);
 $duration = range(1, 5);
 $duration_dropdown = html_drop_down_arrays("duration_drop", $duration, $duration, "3"); //date("H",time()));
 
+$aim_duration_text = isset($_GET['aim_duration_text']) ? $_GET['aim_duration_text'] : '3000-01-01 00:00:00';
+
 
 $day = range(1, 31);
 $day_dropdown = html_drop_down_arrays("day_drop", $day, $day, date("j", time()));
@@ -46,7 +54,7 @@ $month = range(1, 12);
 $month_dropdown = html_drop_down_arrays("month_drop", $month, $month, date("n", time()));
 
 
-$year = range(2010, (date("Y", time())) + 1);
+$year = range(2011, (date("Y", time())) + 1);
 $year_dropdown = html_drop_down_arrays("year_drop", $year, $year, date("Y", time()));
 
 
@@ -120,11 +128,9 @@ $activity_dropdown = html_drop_down_arrays_multiple("activity_drop", $ActivityNa
 
 $aim_name_textbox = html_input_text("aim_name_text", $aim_name_textbox, 25, "default");
 
-$aim_duration_textbox = html_input_text("aim_duration_text", $aim_duration_textbox, 5, "default");
+$aim_duration_textbox = html_input_text("aim_duration_text", $aim_duration_textbox, 5, 'gfgsfg$aim_duration_text');
 
 $aim_description_textbox = html_text_area("aim_description_text", $aim_description_textbox,20,50, "htmltextarea");
-
-
 
 
 
@@ -138,18 +144,31 @@ if ($_REQUEST['add'] == "    Vstavi    ") {
   
     $data = array(
        'persons_id' => $ime,
-      //  'persons_id' => $person_drop,
-     //   'persons_id_responsible' => $responsible_drop,
+      //'persons_id' => $person_drop,
+     // 'persons_id_responsible' => $responsible_drop,
         'name' => $aim_name_text, //$user_id,
-     //   'work_work_id' => $activity_drop,
+        'started_at'=> $beginDate,
+     // 'work_work_id' => $activity_drop,
         'created_by' => $person_id,
-        'duration' => $aim_duration_text,
         'description' => $aim_description_text
     );
     $db->insert('aim', $data);
+    //@todo Če slučajno še en vpiše takoj za tem bo prišlo do napake!!!!!!!!!! Popravi!!
     $getLastAimId=$dal->get_data_from_aim_order_by_id_desc();
     $getLastAimIdLast=$getLastAimId[0];
     $aim_id=$getLastAimIdLast[id];
+    
+    if ($aim_duration_text=="") {
+        $aim_duration_text='3000-01-01';
+      }
+    $data = array (
+        'expired_at' => $aim_duration_text,//$aim_duration_text,
+        'aim_id'=> $aim_id,
+        'duration'=> $duration
+        
+    );
+      $db->insert('AimDuration', $data);
+      
     echo "aim_id=$aim_id";
     foreach ($responsible_drop as $responsible_drop) {
        $data =array(
@@ -209,6 +228,11 @@ $tem = str_replace("##IME##", $name_drop, $tem);
 
 $tem = str_replace("##FIRST##", $first, $tem);
 $tem = str_replace("##LAST##", $last, $tem);
+
+
+$tem = str_replace("##DAYDROP##", $day_dropdown, $tem);
+$tem = str_replace("##MONTHDROP##", $month_dropdown, $tem);
+$tem = str_replace("##YEARDROP##", $year_dropdown, $tem);
 
 $tem = str_replace("##ADDPERSONDROP##", $person_dropdown, $tem);
 $tem = str_replace("##ADDRESPONSNAME##", $responisble_dropdown, $tem);

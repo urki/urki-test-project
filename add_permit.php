@@ -198,9 +198,7 @@ if ($_REQUEST['add'] == "    Dodaj    ") {
 
                         foreach ($result as $res) {
                             $weekday = $res["DayOfWeek"];
-                            
                             $maxJobTime = $res["maxJobTime"];
-                            
                             $workingTime = $res["workingTime"];
                         }
 
@@ -246,10 +244,9 @@ if ($_REQUEST['add'] == "    Dodaj    ") {
                         foreach ($result as $res) {
                             $workingTime_id = $res["id"];
                         }
-                        
-                           $data = array(
+                            $data = array(
                              'workingTime_id' =>  $workingTime_id,
-                              'id_approver'=> $name_drop,
+                              'id_approver'=> $person_id,
                               'status' => '0'
                         );                         
                         $db->insert('working_time_status', $data);                        

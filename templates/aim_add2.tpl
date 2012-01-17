@@ -27,13 +27,13 @@ oseba: ##NAME_DROP##
                 <label>Nosilec:</label><br>
                 ##ADDRESPONSNAME##
             </div>
-              <div class="span-2">
+              <div class="span-3">
                 <label>Trajanje: (ur)</label><br>
                 ##ADDDURATION##
             </div>
-            <div class="span-6">
-                <label>Predviden datum:</label><br>
-                ##ADDDATE## <hr>
+            <div class="span-5">
+                <label>Predviden datum konca:</label><br>
+                ##DAYDROP##/##MONTHDROP##/##YEARDROP##
             </div>           
             <div class="span-6 last">
                 <label id=htmltextarea>Opis:</label><br>

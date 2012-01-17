@@ -32,7 +32,44 @@ class DAL {
 //get number of disorder people by unit and by reole id
 
  
-   
+    /**
+	* working_time_status querys
+	* 
+	* Query for getting data from working_time_query entity which was last or first inserted
+	* Query:
+	*
+    *{@source 3 3}
+    *@see DAL::get_person_data_from_persons_by_person_id, id()
+        */     
+        /*public function get_data_from_workingTime_status($minOrMax='<') {
+        
+            $sql="
+             select m1.*  from working_time_status as m1 left join working_time_status as m2 
+                 ON (m1.`id` $minOrMax m2.`id` and m1.`workingTime_id`=m2.`workingTime_id`)
+                 Where m2.id is NULL
+             ";
+        return $this->query($sql);
+         
+         */
+    public function get_data_group_from_workingTime_status_workingTime_persons_by_status($status) {
+           if (isset($status)){
+               $status='status='.$status;
+           }
+           else {
+            $status='';
+           }
+            $sql="
+             SELECT m1. * 
+             FROM working_time_status AS m1
+              LEFT JOIN working_time_status AS m2 ON ( m1.`id` < m2.`id`
+             AND m1.`workingTime_id` = m2.`workingTime_id` )
+             WHERE m2.id IS NULL $status
+             ";
+        return $this->query($sql);
+    }
+    
+    
+    
  
     /**
 	* Aims querys

@@ -356,6 +356,7 @@ foreach ($result as $res) {
     $names[] .= $res["last"] . " " . $res["first"];
     $values[] .= $res["id_person"];
 }
+$name_drop=isset($name_drop);
 $name_dropdown = html_drop_down_arrays("name_drop", $names, $values, $name_drop);
 ////////////////
 //drop down za dolocitev vpisovalca aktivnosti
@@ -382,6 +383,7 @@ foreach ($result as $res) {
     $wname[] .= $res["applic"] . " --> " . $res["name"];
     $wvalue[] .= $res["work_id"];
 }
+$work_drop=isset($work_drop);
 $work_dropdown = html_drop_down_arrays("work_drop", $wname, $wvalue, $work_drop);
 ////////////
 //get user id
@@ -389,7 +391,8 @@ $sql = "SELECT id_person FROM persons where username='$identity'";
 $user_id = $db->fetchOne($sql);
 
 
-$name = $_REQUEST['name'];
+$name = isset($name);
+//$name = $_REQUEST['name'];
 
 
 if ($_REQUEST['add'] == "    Shrani    ") {
@@ -540,11 +543,13 @@ $row = $tmp[1];
 $tem = $tmp[0];
 
 //spremenljivki za mesec ine leto
-if ($mon < 1 or $mon > 12)
-    $mon = '';
 
-if (!$mon)
-    $mon = date("m", time());
+$mon=isset($mon);
+if (!$mon) {
+    $mon = date("m", time());}
+
+if ($mon < 1 or $mon > 12)
+    $mon = ''; 
 
 if (!$year)
     $year = date("Y", time());

@@ -1,5 +1,4 @@
-
-<?
+<?php
 
 
 $DO_NOT_REDIRECT="false";

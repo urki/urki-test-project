@@ -1,4 +1,4 @@
-<?
+<?php
 require_once("inc/config.php");
 
 $sql = "SELECT  `person_id`,YEAR( FROM_UNIXTIME(  `start` ) )year,COUNT( applic ) as st, work.type

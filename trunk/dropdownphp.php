@@ -11,4 +11,4 @@ while (list ($key, $val) = each ($color)) {
 echo "$val <br>";
 }
 }//else{echo "not array";}
-?>
+

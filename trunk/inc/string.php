@@ -1,4 +1,4 @@
-<?
+<?php
 function str_sumniki($text) {
 	$text = str_replace("&#269","c",$text);
 	$text = str_replace("&#158","z",$text);

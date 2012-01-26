@@ -1,6 +1,6 @@
 <?php
 
-require_once("inc/config.php");
+require_once(__DIR__."/inc/config.php");
 check_role($ROLE_EMPLOYED);
 
 $tem = template_open("NEWview_client_diary.tpl");

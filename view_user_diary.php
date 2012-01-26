@@ -1,4 +1,4 @@
-<?
+<?php
 
 require_once("inc/config.php");
 check_role($ROLE_LEADER);

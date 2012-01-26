@@ -1,4 +1,4 @@
-<?
+<?php
 
 function date_work_days($year,$month, $sum = FALSE ) {
 	global $db;

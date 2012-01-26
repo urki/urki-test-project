@@ -1,4 +1,4 @@
-<?
+<?php
 require_once 'Zend/Db/Adapter/Pdo/Mysql.php';
 require_once 'Zend/Auth/Adapter/DbTable.php';
 require_once 'Zend/Db.php';
@@ -11,7 +11,7 @@ require_once 'string.php';
 
 
 // Include DAL class for querys
-require_once(dirname(dirname(__FILE__)) . '/inc/class/DAL.php');
+require_once(__DIR__.'/class/DAL.php');
 
 //require_once('inc/class/DAL.php');
 
@@ -49,12 +49,7 @@ if ($auth->hasIdentity()) {
 		header ("location:login.php");
 		
 }
-//$BASE_DIR="/Users/samek/Sites/komplet";
-//$BASE_DIR="/Applications/MAMP/htdocs/komplet/";
-$BASE_DIR="/home/uros/Projects/intranetDevelop";
-//$BASE_DIR="/home/uros/Projects/NEWintranetDevelop";
-//$BASE_DIR="/var/www/komplet";
-//$BASE_DIR="/var/www/intranet2";
+$BASE_DIR=__DIR__.'/../';
 $TEMPLATE_DIR=$BASE_DIR."/templates/";
 
 
@@ -78,4 +73,5 @@ function check_role($role_id_param,$url = FALSE) {
 	}
 	return true;
 }
+
 

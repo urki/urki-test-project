@@ -171,6 +171,6 @@ if (!$out) {
 }
 error_log($out, 0);
 ?>
-	<chart caption='<? echo $title_graph; ?> ' subcaption='<? echo $subtitle; ?>' xAxisName='<? echo $x_axis; ?>' yAxisName='<? echo $y_axis; ?>' numberSuffix='<? echo $suffix; ?>'  showExportDataMenuItem='1' >
-<? echo $out; ?>
+	<chart caption='<?php echo $title_graph; ?> ' subcaption='<?php echo $subtitle; ?>' xAxisName='<?php echo $x_axis; ?>' yAxisName='<?php echo $y_axis; ?>' numberSuffix='<?php echo $suffix; ?>'  showExportDataMenuItem='1' >
+<?php echo $out; ?>
 </chart>

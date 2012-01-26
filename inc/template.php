@@ -1,4 +1,4 @@
-<?
+<?php
 //!it openes template nad returns it as string
 //you need to suply the filename [template dir is prefixed]
 //@author Samo Gabrovec (root@velenje.cx)

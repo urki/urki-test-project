@@ -1,4 +1,4 @@
-<?
+<?php
 
 $DO_NOT_REDIRECT="false";
 require_once("inc/config.php");

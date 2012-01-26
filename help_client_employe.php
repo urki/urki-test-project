@@ -1,4 +1,4 @@
-<?
+<?php
 require_once("inc/config.php");
 check_role($ROLE_USER);
 $TITLE = "&#352ifrant aktivnosti zaposlenih";
@@ -35,4 +35,4 @@ $tem = template_clean_up_tags($tem,"##");
 echo $tem;
 
 
-?>
+

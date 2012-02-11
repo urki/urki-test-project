@@ -42,7 +42,7 @@ if (!$mon)
 if (!$year)
     $year = date("Y", time());
 
-
+$untilyear=$year;
 
 
 
@@ -91,7 +91,7 @@ foreach ($unitarray as $unit_in) {
         $i++;
         $x = 1;
         foreach ($disorderarray as $disorder_id) {
-            $disorders = $dal->get_count_dissorder_age_persons_by_unit($unit_in, 0, 11, $age_min, $age_max, $disorder_id);
+            $disorders = $dal->get_count_dissorder_age_persons_by_unit($unit_in, 0, 11, $age_min, $age_max, $disorder_id,$untilyear);
             $disorders = $disorders[0];
             $tableIn = str_replace("##DISORDER" . $x . "##", $disorders["sestevek"], $tableIn);
            // echo $disorders["sestevek"] . "     | ";

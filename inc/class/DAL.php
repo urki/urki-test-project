@@ -168,12 +168,12 @@ class DAL {
         return $this->query($sql);
     }
 /////////////////////////////////
-    public function get_count_dissorder_age_persons_by_unit($unit_in, $role_id_min, $role_id_max, $age_min, $age_max, $disorder_id) {
+    public function get_count_dissorder_age_persons_by_unit($unit_in, $role_id_min, $role_id_max, $age_min, $age_max, $disorder_id, $untilyear=2011) {
         $sql = "SELECT  count(`id_person`) as sestevek
                FROM `persons` left join DisorderLog on DisorderLog.person_id=persons.id_person
                where (year(`birthday`)
-                      between year(now())-$age_max
-                              and year(now())-$age_min)
+                      between $untilyear -$age_max
+                              and $untilyear-$age_min)
                and id_role between $role_id_min and $role_id_max
                and unit in ($unit_in) and disorder_id in ($disorder_id)  ";
         return $this->query($sql);
@@ -205,7 +205,7 @@ class DAL {
     }
 
     public function get_count_persons_registered_by_unit($date) {
-        $sql = ' SELECT count( `person_id` ) as stevilo, unit as unit_id
+        $sql = ' SELECT count( `person_id` ) as stevilo, persons.unit as unit_id
                  FROM `PersonStatus` left join persons on person_id=id_person
                  WHERE (
                   ("' . $date . '") >= `created_at`
@@ -213,7 +213,7 @@ class DAL {
                    AND (
                    ("' . $date . '") <= `expired_at`
                    OR `expired_at` = "0000-00-00"
-                   ) group by unit'
+                   ) group by persons.unit'
         ;
 //echo $sql;
 //die();

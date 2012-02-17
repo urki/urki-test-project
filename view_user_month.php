@@ -298,8 +298,12 @@ if (!$LOG) {
                         $LOG[$person_id_db]["sabbatical_leave"] +=1;
                         $LOG[$person_id_db]["sabbatical_leave_hours"] += ( ($day_r['end'] - ($day_r['start'])));
                         break;
-
-
+                     
+                    //odhod na malico
+                     case "27":
+                        $LOG[$person_id_db]["brunch_leave"] +=1;
+                        $LOG[$person_id_db]["brunch_leave_hours"] += ( ($day_r['end'] - ($day_r['start'])));
+                        break;
 
                     //ce ni zgoraj navedeno potem je zabusaval//
                     default:

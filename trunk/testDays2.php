@@ -45,6 +45,7 @@ $prazniki = array('2010-01-01', '2010-02-08','2010-04-05', '2010-04-27','2010-06
 
 $number_days=0;
 unset($percentage_month);
+
 $percentage_month=array();
 foreach ($dates_array as $date) {
     $weekday = date('l', strtotime($date)); // note: first arg to date() is lower-case L
@@ -60,10 +61,12 @@ foreach ($dates_array as $date) {
 	     $continue;
             }
         }
+       
 	if ($free_day) {
-		//echo $date ." = " .$free_day."<br>"; // praznik//
+	       //echo $date ." = " .$free_day."<br>"; // praznik//
 		continue; //za ta datum in gremo na novga//
  	} else  {
+ 	
 		//gledama za ta dan//
 		$number_days++;
 		$q = new DAL();
@@ -73,6 +76,7 @@ foreach ($dates_array as $date) {
 		//if ($x==12) print_r($res_work);
 		//var_dump($res_work);
 		//die()
+		
 		foreach ($res_work as $work_c) {
 
 			$unit_id = $work_c["unit_id"];
@@ -80,9 +84,11 @@ foreach ($dates_array as $date) {
 			//if ($unit_id==77 and $x==12) echo $date." ".$stevilo."   ----   ".print_r($work_c)."<br><br><hr>";
 			$work_count[$date][$unit_id]=$stevilo;
 			//echo $stevilo." - u:". $unit_id."  $date <br>";		
-		}		  
+		}
+				  
 		unset($res_full);
 		$res_full =  $q2->get_count_persons_registered_by_unit($date);
+		
 		//if ($x==12  ) print_r($res_full);
 	//	var_dump($res_full);
 		foreach ($res_full as $all) { 
@@ -99,6 +105,7 @@ foreach ($dates_array as $date) {
 	}
     }
 }
+
 ///print out report///
 //print_r($percentage_month);
 //die();

@@ -35,14 +35,20 @@ if ($role_id) {
         case ($role_id < $ROLE_ADMIN and $role_id >= $ROLE_LEADER):
             $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
             $tem = str_replace("##IF_BUT_LEADER##", "", $tem);
-             $conditionUnit="and unit=$unit";//to be in that unit
+            if ($unit>=77 or $unit>=78){
+            $conditionUnit="and unit in (77,78)";
+            }
+            else   {$conditionUnit="and unit=$unit"; }
             break;
  
        case ($role_id < $ROLE_LEADER and $role_id >= $ROLE_EMPLOYED):
             $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
             $tem = template_clean_up_tags($tem, "##IF_LEADER##", 1);
             $tem = str_replace("##IF_BUT_LEADER##", "", $tem);
-             $conditionUnit="and unit=$unit";//to be in that unit
+               if ($unit>=77 or $unit>=78){
+                 $conditionUnit="and unit in (77,78)";
+               }
+               else {  $conditionUnit="and unit=$unit";}//to be in that unit
             break;
      
    
@@ -72,9 +78,8 @@ if ($role_id) {
  * 
  */
  
-   if ($unit>=77 or $unit>=78){
-        $conditionUnit="and unit in (77,78)";
-   }
+    
+       
    
    
    

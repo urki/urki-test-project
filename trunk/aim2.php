@@ -16,7 +16,7 @@ $tem = template_add_head_foot($tem, "head", "foot");
 include 'name_dropdown.php';
 
 
-$beginDate = isset($beginDate);
+//$beginDate = if    isset($beginDate);
 if (!$beginDate) {
     $beginDate = date("Y-m-d");
 }

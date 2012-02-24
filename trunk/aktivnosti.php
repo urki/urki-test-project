@@ -11,13 +11,14 @@ $TITLE = "Aktivnosti";
 //$tem = template_open("NEWadd_work_emplo.tpl").
 $tem = template_open("NEWaktivnosti_employe.tpl") .
         $tem = template_open("drekstos.tpl") . //NEWaktivnosti_head.tpl").
-
         $tem = template_open("NEWview_last_insert_client_diary.tpl") .
         $tem = template_open("NEWview_client_diary.tpl");
 
 //$tem = template_add_head_foot($tem,head,blank);
 $tem = template_add_head_foot($tem, head, foot);
 
+
+   
 //Za izpis tistih katere hočem videti  - to moram prestavit v funkcijo!!!!!!!
 
 if ($role_id) {
@@ -36,13 +37,15 @@ if ($role_id) {
             $tem = str_replace("##IF_BUT_LEADER##", "", $tem);
              $conditionUnit="and unit=$unit";//to be in that unit
             break;
-
-        case ($role_id < $ROLE_LEADER and $role_id >= $ROLE_EMPLOYED):
+ 
+       case ($role_id < $ROLE_LEADER and $role_id >= $ROLE_EMPLOYED):
             $tem = template_clean_up_tags($tem, "##IF_ADMIN##", 1);
             $tem = template_clean_up_tags($tem, "##IF_LEADER##", 1);
             $tem = str_replace("##IF_BUT_LEADER##", "", $tem);
              $conditionUnit="and unit=$unit";//to be in that unit
             break;
+     
+   
 
         default:
 
@@ -62,6 +65,19 @@ if ($role_id) {
 //KONEC  Za izpis tistih katere hočem  - to moram prestavit v funkcijo!!!!!!!
 ///////////////////////////////////////////////////////////////////////////////////7
 //get name of login person
+   
+   
+
+/*Začasna pogoj za skupni mozirje in velenje
+ * 
+ */
+ 
+   if ($unit>=77 or $unit>=78){
+        $conditionUnit="and unit in (77,78)";
+   }
+   
+   
+   
 $nameOfloginPerson = $db->fetchOne("SELECT first FROM `persons` WHERE id_person=$person_id");
 
 
@@ -89,6 +105,9 @@ $emp_month_dropdown = html_drop_down_arrays("emp_month_drop", $empmonth, $empmon
 
 $empyear = range(2009, (date("Y", time())) + 1);
 $emp_year_dropdown = html_drop_down_arrays("emp_year_drop", $empyear, $empyear, date("Y", time()));
+
+
+
 
 //dropdown locations
 $sql = "SELECT * FROM locations where `type`=1 order by `name_location`";
@@ -356,8 +375,11 @@ foreach ($result as $res) {
     $names[] .= $res["last"] . " " . $res["first"];
     $values[] .= $res["id_person"];
 }
-$name_drop=isset($name_drop);
+//$name_drop=isset($name_drop);
+
 $name_dropdown = html_drop_down_arrays("name_drop", $names, $values, $name_drop);
+
+
 ////////////////
 //drop down za dolocitev vpisovalca aktivnosti
 $sql = "SELECT * FROM persons WHERE 20<`id_role` and unit<>0 order by unit, letter ASC";
@@ -383,7 +405,7 @@ foreach ($result as $res) {
     $wname[] .= $res["applic"] . " --> " . $res["name"];
     $wvalue[] .= $res["work_id"];
 }
-$work_drop=isset($work_drop);
+//$work_drop=isset($work_drop);
 $work_dropdown = html_drop_down_arrays("work_drop", $wname, $wvalue, $work_drop);
 ////////////
 //get user id
@@ -391,8 +413,8 @@ $sql = "SELECT id_person FROM persons where username='$identity'";
 $user_id = $db->fetchOne($sql);
 
 
-$name = isset($name);
-//$name = $_REQUEST['name'];
+//$name = isset($name);
+$name = $_REQUEST['name'];
 
 
 if ($_REQUEST['add'] == "    Shrani    ") {
@@ -479,6 +501,8 @@ if ($_REQUEST['add'] == "    Shrani    ") {
 
 
         //Preveri če je takrat na šihtu
+       
+      
 
         $sql_job = "select *
               from log
@@ -524,6 +548,7 @@ if ($_REQUEST['add'] == "    Shrani    ") {
         $db->insert('work_log', $data);
 
 
+       
         //header("location:".$_SERVER['HTTP_REFERER']);
         // header("location:aktivnosti.php" . $param);
         $messagetype = "success";
@@ -544,7 +569,7 @@ $tem = $tmp[0];
 
 //spremenljivki za mesec ine leto
 
-$mon=isset($mon);
+
 if (!$mon) {
     $mon = date("m", time());}
 
@@ -564,15 +589,15 @@ if ($role_id < $ROLE_LEADER) {
     $dsql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and ((`assessor_id`>0 and
 `assessor_id`=$person_id)or(assessor_id=0 and
 work_log.`person_id`=$person_id)) and date(from_unixtime(end))=concat($year,'-',$mon,'-',$day) /* month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year and day(from_unixtime('end'))=$day */  order by log_id desc limit 0,3";
-} elseif ($role_id < $ROLE_ADMIN and $role_id >= $ROLE_LEADER) {
+}
+
+elseif  
+    ($role_id < $ROLE_ADMIN and $role_id >= $ROLE_LEADER) {
     //$dsql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and `assessor_id`>0 and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year order by datum desc, priim_varov, ime_varov, zacetek";
     $dsql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and date(from_unixtime(end))=concat($year,'-',$mon,'-',$day) /* month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year */ order by log_id desc limit 0,3";
 } else {
     $dsql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id`,`work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` /*and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year */ order by log_id desc limit 0,3";
 }
-
-
-
 
 
 $dresult = $db->fetchAll($dsql);

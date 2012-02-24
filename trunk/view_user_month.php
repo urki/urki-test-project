@@ -187,7 +187,12 @@ if (!$LOG) {
                         $LOG[$person_id_db]["compensation_wdays_all"] += ( $rs_py['wdays']);
                         break;
 
-
+                     //odhod na malico
+                     case "27":
+                        $LOG[$person_id_db]["brunch_leave"] +=1;
+                        $LOG[$person_id_db]["brunch_leave_hours"] += ( ($day_r['end'] - ($day_r['start'])));
+                        break;
+                    
                     //ce ni zgoraj navedeno potem je zabusaval//
                     default:
                         $LOG[$person_id_db]["other_hours_all"] += ( ($rs_py['end'] - $rs_py['start']) / 3600 );

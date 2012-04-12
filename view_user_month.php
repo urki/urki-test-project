@@ -14,8 +14,15 @@ if ($role_id < 80) {
     //$tem = template_open("view_user_month_leader.tpl");
     $tem = template_open("view_user_month.tpl");
 } else {
-    $tem = template_open("view_user_month.tpl");
-}
+    if ($role_id==90) { //racunovodkinja
+      $tem = template_open("view_user_month_accountant.tpl");   
+    }
+    else {
+     $tem = template_open("view_user_month_leader.tpl");   
+    }
+        }
+
+
 
 
 $tem = template_add_head_foot($tem, head, foot);
@@ -115,6 +122,7 @@ if (!$LOG) {
                     //bolniska//
                     case "6":
                         $LOG[$person_id_db]["sick_days_all"] +=1;
+                      
                         break;
 
                     //nadure
@@ -227,6 +235,7 @@ if (!$LOG) {
                     //izobra�evanje//
                     case "2":
                         $LOG[$person_id_db]["education"] +=1;
+                        $LOG[$person_id_db]["education_hours"] +=( ($day_r['end'] - $day_r['start']));
                         break;
 
                     //Privat izhodi//
@@ -237,6 +246,7 @@ if (!$LOG) {
                     //bolniska//
                     case "6":
                         $LOG[$person_id_db]["sick_days"] +=1;
+                        $LOG[$person_id_db]["sick_hours"] +=( ($day_r['end'] - $day_r['start']));
                         break;
 
 
@@ -248,6 +258,7 @@ if (!$LOG) {
                     //nega//
                     case "8":
                         $LOG[$person_id_db]["care"] +=1;
+                        $LOG[$person_id_db]["care_hours"] +=( ($day_r['end'] - ($day_r['start'])));
                         break;
 
                     //Sluzbeno potovanje//
@@ -268,6 +279,7 @@ if (!$LOG) {
                     //porodniska//
                     case "13":
                         $LOG[$person_id_db]["pregnancy"] +=1;
+                        $LOG[$person_id_db]["pregnancy_hours"] +=( ($day_r['end'] - $day_r['start']));
                         break;
 
 

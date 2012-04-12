@@ -44,7 +44,30 @@ if (!$year)
 
 //pogoj, da lahko vsi ki imajo nad 80 role_id vidijo vse in dopisujejo vse
 if ($role_id < $ROLE_LEADER) {
-    $sql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where id$id and `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and `assessor_id`>0 and `assessor_id`=$person_id and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year order by datum desc, letter, ime_varov,  zacetek ";
+    $sql = "SELECT id as log_id, 
+              date_format(from_unixtime(`end`),'%d.%m.%Y') 
+              datum,
+              `persons`.`first` ime_varov,
+              `persons`.`last` priim_varov,
+              `work`.`name`,
+              time(from_unixtime(`start`)) zacetek, 
+              time(from_unixtime(`end`)) konec,
+              `work_log`.`assessor_id` ,
+              `work_log`.`comm` from `work_log`,
+              `work`,
+              `persons` 
+            WHERE id$id
+              and `work`.`work_id`=`work_log`.`work_id` 
+              and `persons`.`id_person`=`work_log`.`person_id` 
+              and `unit`=$unit 
+              and `assessor_id`>0 
+              and `assessor_id`=$person_id
+              and month(from_unixtime(`end`))=$mon
+              and year(from_unixtime(`end`))=$year 
+            ORDER BY datum desc,
+              letter, 
+              ime_varov, 
+              zacetek ";
    
     //echo $sql;
 } elseif ($role_id < $ROLE_ADMIN and $role_id > $ROLE_LEADER) {

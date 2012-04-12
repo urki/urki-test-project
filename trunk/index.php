@@ -1,11 +1,21 @@
 <?php
 
-
 $DO_NOT_REDIRECT="false";
 require_once("inc/config.php");
 check_role($ROLE_EMPLOYED, "login.php");
+if ($role_id<80){
 header("location:aktivnosti.php");
-exit;
+exit;}
+else {
+    if ($role_id<90){
+    header("location:view_user_month.php");
+    exit;
+    }
+    else
+     header("location:reports.php");
+    exit;
+        
+}
 /*
 $TITLE = "Evidenca prisotnosti";
 

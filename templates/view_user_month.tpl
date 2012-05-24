@@ -1,3 +1,4 @@
+
 <table width="964" border="1">
   <tr>
     <td bordercolor="#CCCCCC" bgcolor="#999999" class="text"><div align="center"><span class="style4">Ime in Priimek</span></div></td>
@@ -59,5 +60,3 @@
 	<input type="submit" name="Poslji porocilo" value="Poslji porocilo">
    </form>
   ##IF_SAVE## 
-
-  

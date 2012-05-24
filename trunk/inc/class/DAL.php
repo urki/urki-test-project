@@ -69,6 +69,26 @@ class DAL {
     }
     
     
+     /**
+	* Aims querys
+	* 
+	* Query for getting data from aim entity by person_id and which are not expired_at like '0000-00%'
+	* Query:
+	*
+    *{@source 3 3}
+    *@see DAL::get_data_from_aim_by_person_not_expired()
+        */     
+        public function get_data_from_aim_by_person_not_expired($person_id) {
+        $sql="
+         SELECT * 
+         FROM aim 
+         WHERE
+         expired_at like '0000%' 
+         AND persons_id = $person_id
+         order by id desc";
+        return $this->query($sql);
+    }
+    
     
  
     /**

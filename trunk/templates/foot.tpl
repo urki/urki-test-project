@@ -1,3 +1,5 @@
+<div id="bottom-wrap">
+
 <hr>
 <div class="push-1" id="footer">
 
@@ -18,6 +20,6 @@
 
    | <a href="logout.php" class="wresize"><B>Odjava</B></a>##IF_EMPLOYED##
 </div>
-	
+	</div>
 </body>
 </html>

@@ -50,9 +50,8 @@ document.editform3.submit();
     </head>
 
     <body>
-
-        <div class="container howgrid">
-            <div class="span-24 last" id="maintopheader">
+        <div id="header-wrap">
+			 <div class="span-24 last" id="maintopheader">
                 <div class="span-19" id="leftheadertop">
                     <a href="view_notice.php"><b>Glavna stran</b></a>
                 </div>
@@ -63,7 +62,12 @@ document.editform3.submit();
 
                 </div>
             </div>
-            <hr></hr>
+              <hr></hr>
+        </div>
+        
+        <div class="container howgrid">
+           
+          
 
             <div class="span-24 last" id="mainheader">
                 <div class="span-6" id="logo">

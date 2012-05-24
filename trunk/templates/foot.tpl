@@ -1,3 +1,4 @@
+</div>
 <div id="bottom-wrap">
 
 <hr>

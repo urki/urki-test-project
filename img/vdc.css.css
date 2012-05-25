@@ -41,6 +41,10 @@ root {
 	background-color: white;
 }
 
+#mainPage {
+   padding-bottom:80px;
+
+}
 
 .main {
     opacity:0.4;filter:alpha(opacity=40);

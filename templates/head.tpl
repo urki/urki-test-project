@@ -81,7 +81,7 @@ document.editform3.submit();
                 <h3 id=message class="##MESSAGETYPE##">##MESSAGE##</h3>
             </div>
 
-               <div class="span-24 last">
+               <div id=mainPage class="span-24 last">
 
 
 

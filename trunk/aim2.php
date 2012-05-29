@@ -47,25 +47,26 @@ if ($_REQUEST['prikazi']) {
 $duration = range(1, 5);
 $duration_dropdown = html_drop_down_arrays("duration_drop", $duration, $duration, "3"); //date("H",time()));
 
-$aim_duration_text = isset($_GET['aim_duration_text']) ? $_GET['aim_duration_text'] : '3000-01-01 00:00:00';
+//$aim_duration_text = isset($_GET['aim_duration_text']) ? $_GET['aim_duration_text'] : '3000-01-01 00:00:00';
 
 
 $day = range(1, 31);
-$day_dropdown = html_drop_down_arrays("day_drop", $day, $day, date("j", time()));
+$day_dropdown = html_drop_down_arrays("day_drop", $day, $day, '31');//date("j", time()));
 
 $month = range(1, 12);
-$month_dropdown = html_drop_down_arrays("month_drop", $month, $month, date("n", time()));
+$month_dropdown = html_drop_down_arrays("month_drop", $month, $month, '12');//date("n", time()));
 
 
-$year = range(2011, (date("Y", time())) + 1);
+$year = range((date("Y", time())) - 1, (date("Y", time())) + 1);
 $year_dropdown = html_drop_down_arrays("year_drop", $year, $year, date("Y", time()));
 
+$expireDurationDate=$year_drop.'-'.$month_drop.'-'.$day_drop;
 
 //
 //nosilec drop down
 //
 
-$sql = "SELECT * FROM `persons` WHERE  20<`id_role` and unit $unit order by unit, letter ASC";
+$sql = "SELECT * FROM `persons` WHERE  20<`id_role` and unit $unit order by unit, last ASC";
 //var_dump($sql);
 //echo "A tu se dela?"; TO jke drek od ovce ša sploh pšrogfaf fd shsdrt sdrhtf
 $result = $db->fetchAll($sql);
@@ -80,7 +81,7 @@ foreach ($result as $res) {
 }
 
 ///////////
-$responisble_dropdown = html_drop_down_arrays_multiple("responsible_drop", $ResponsibleName, $ResponsibleValue, $ResponsibleName);
+$responisble_dropdown = html_drop_down_arrays_multiple("responsible_drop", $ResponsibleName, $ResponsibleValue, $ResponsibleName,10);
 
 
 
@@ -115,7 +116,7 @@ $person_dropdown = html_drop_down_arrays("person_drop", $PersonName, $PersonValu
 
 
 //activity drop down
-$sql = "SELECT * FROM `work` WHERE `group`<'11'";
+$sql = "SELECT * FROM `work` WHERE `group`<'11' order by applic";
 $result = $db->fetchAll($sql);
 foreach ($result as $res) {
     if (!is_array($ActivityName)) {
@@ -127,7 +128,7 @@ foreach ($result as $res) {
     $ActivityValue[] .= $res["work_id"];
 }
 ///////////
-$activity_dropdown = html_drop_down_arrays_multiple("activity_drop", $ActivityName, $ActivityValue, $ActivityName);
+$activity_dropdown = html_drop_down_arrays_multiple("activity_drop", $ActivityName, $ActivityValue, $ActivityName,10);
 
 $aim_name_textbox = html_input_text("aim_name_text", $aim_name_textbox, 25, "default");
 
@@ -135,8 +136,9 @@ $aim_duration_textbox = html_input_text("aim_duration_text", $aim_duration_textb
 
 $aim_description_textbox = html_text_area("aim_description_text", $aim_description_textbox, 20, 50, "htmltextarea");
 
-
-
+if ($expireDurationDate == "") {
+        $expireDurationDate = '3000-01-01';
+}
 
 /////////////////
 //For geting from html
@@ -152,7 +154,9 @@ if ($_REQUEST['add'] == "    Vstavi    ") {
        // 'started_at' => $beginDate,
         // 'work_work_id' => $activity_drop,
         'created_by' => $person_id,
-        'description' => ($_REQUEST[aim_description_text])
+        'description' => ($_REQUEST[aim_description_text]),
+        'expired_at' => $expireDurationDate,
+        'duration' => $aim_duration_text
     );
     
     $db->insert('aim', $data); 
@@ -162,13 +166,12 @@ if ($_REQUEST['add'] == "    Vstavi    ") {
     $getLastAimIdLast = $getLastAimId[0];
     $aim_id = $getLastAimIdLast[id];
 
-    if ($aim_duration_text == "") {
-        $aim_duration_text = '3000-01-01';
-    }   echo "tu!!!";
+    
+    
     $data = array(
-        'expired_at' => $aim_duration_text, //$aim_duration_text,
-        'aim_id' => $aim_id,
-        'duration' => $duration
+        'expired_at' => $expireDurationDate,
+        'duration' => $aim_duration_text,//, $duration //$aim_duration_text,
+        'aim_id' => $aim_id
     );
     $db->insert('AimDuration', $data);
 
@@ -245,7 +248,7 @@ $tem = str_replace("##ADDDURATION##", $aim_duration_textbox, $tem);
 $tem = str_replace("##ADDACTIVITYNAME##", $aim_name_textbox, $tem);
 $tem = str_replace("##LOGS##", $whole_table, $tem);
 $tem = str_replace("##MESSAGE##", $message, $tem);
-$tem = str_replace('##USER##', $identity, $tem);
-$tem = str_replace('##TITLE##', $TITLE, $tem);
+$tem = str_replace("##USER##", $identity, $tem);
+$tem = str_replace("##TITLE##", $TITLE, $tem);
 $tem = template_clean_up_tags($tem, "##");
 echo $tem;

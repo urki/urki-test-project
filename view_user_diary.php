@@ -24,10 +24,10 @@ if (!$year)
 
 //pogoj, da lahko vsi ki imajo nad 80 role_id vidijo vse in dopisujejo vse
 if ($role_id<80){
-     $sql = "SELECT * FROM log,jobtype,persons where jobtype_id=job_id and person_id=id_person and unit=$role_id and id_role>30 and month(from_unixtime(START))=$mon   and year( from_unixtime(START ) )=$year order by last, start ASC"; 
+     $sql = "SELECT * FROM log,jobtype,persons where jobtype_id=job_id and person_id=id_person and unit=$role_id and id_role>30 and month(from_unixtime(START))=$mon   and year( from_unixtime(START ) )=$year order by last, first, start ASC"; 
 }
 else {
-   $sql = "SELECT * FROM log,jobtype,persons where jobtype_id=job_id and person_id=id_person and id_role>30 and month(from_unixtime(START))=$mon   and year( from_unixtime(START ) )=$year order by last, start ASC";
+   $sql = "SELECT * FROM log,jobtype,persons where jobtype_id=job_id and person_id=id_person and id_role>30 and month(from_unixtime(START))=$mon   and year( from_unixtime(START ) )=$year order by last, first, start ASC";
 }
 //$sql = "SELECT * FROM log,jobtype where  jobtype_id=job_id order by timestamp ASC"; 
 

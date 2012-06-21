@@ -40,7 +40,7 @@ if ($_REQUEST['add'] == "Dodaj") {
 			$data = array(
 				'username'      => $username,
 				'passwd'		 => $password,
-				'first'      => $first,
+				'first'         => $first,
 				'last'		=> $last,
 				'id_role'	=> $role_drop
 				);

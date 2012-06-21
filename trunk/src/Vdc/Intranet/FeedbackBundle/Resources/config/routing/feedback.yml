@@ -1,0 +1,30 @@
+feedback:
+    pattern:  /
+    defaults: { _controller: "FeedbackBundle:Feedback:index" }
+
+feedback_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "FeedbackBundle:Feedback:show" }
+
+feedback_new:
+    pattern:  /new
+    defaults: { _controller: "FeedbackBundle:Feedback:new" }
+
+feedback_create:
+    pattern:  /create
+    defaults: { _controller: "FeedbackBundle:Feedback:create" }
+    requirements: { _method: post }
+
+feedback_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "FeedbackBundle:Feedback:edit" }
+
+feedback_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "FeedbackBundle:Feedback:update" }
+    requirements: { _method: post }
+
+feedback_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "FeedbackBundle:Feedback:delete" }
+    requirements: { _method: post }

@@ -30,7 +30,9 @@
 	 <ul>
 	   ##IF_EMPLOYED##
                 <li><a href="http://spreadsheets.google.com/viewform?formkey=dC1OcWZRR2o1MEtNNlZlTjJTRVNCeEE6MQ"  class="text"> <b>Prijava napak naprav</b></a><br></li>
-                <li><a href="feedback.php"  class="text"> <b>Prijava vnosov</b></a><br></li>
+                <li><a href="feedback.php"  class="text"> <b>Vprašanja, prošnje ...</b></a><br></li>
+                <li><a href="feedback_aktivnosti.php"  class="text"> <b>Vloga za naknadni vpis aktivnosti</b></a><br></li>
+
            ##IF_EMPLOYED##
            ##IF_LEADER##
 

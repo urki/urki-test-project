@@ -4,15 +4,15 @@ require_once("inc/config.php");
 
 
 check_role($ROLE_USER);
-$TITLE = "Aktivnosti";
+$TITLE = "Vloga za vpis aktivnosti";
 
 
 
 //$tem = template_open("NEWadd_work_emplo.tpl").
-$tem = template_open("NEWaktivnosti_employe.tpl") .
-        $tem = template_open("drekstos.tpl") . //NEWaktivnosti_head.tpl").
-        $tem = template_open("NEWview_last_insert_client_diary.tpl") .
-        $tem = template_open("NEWview_client_diary.tpl");
+//$tem = template_open("feedback_aktivnosti_employe.tpl"); .
+        $tem = template_open("feedback_aktivnosti.tpl");// . //NEWaktivnosti_head.tpl").
+   //     $tem = template_open("NEWview_last_insert_client_diary.tpl") .
+    //    $tem = template_open("NEWview_client_diary.tpl");
 
 //$tem = template_add_head_foot($tem,head,blank);
 $tem = template_add_head_foot($tem, head, foot);
@@ -164,24 +164,10 @@ $emp_work_dropdown = html_drop_down_arrays("emp_work_drop", $emp_wname, $emp_wva
 
 if ($_REQUEST['addemploy'] == "   Shrani   ") {
 
-
-
-    //Če je administrator se štejejo tudi dnevi in se lahko izbere tudi ocenjevalec
-    If ($role_id >= 80) {
-        $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
-        $emp_stop_time = mktime($emp_hour_stop_time_drop, $emp_min_stop_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
-        // $nameOfloginPerson = $db->fetchOne("SELECT first FROM `persons` WHERE id_person=$person_id");
-        $noteemploy.="//dodal $nameOfloginPerson";
-
-      //  $messagetype = "notice";
-     //   $message .= "$nameOfloginPerson, Šel je k role_id > 80 in je tako hour_start_time_drop=$hour_start_time_drop ; emp_min_start_time_drop=$emp_min_start_time_drop in emp_month_drop=$emp_month_drop , emp_year_drop=$emp_year_drop !!<br />";
-    }
-    //če pa je "samo" vodja pa ne more vpisovati dni in ocenjevalca
-    else {
         $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
         $emp_stop_time = mktime($emp_hour_stop_time_drop, $emp_min_stop_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
         $emp_ass_name_drop = $person_id;
-    }
+  
 
 
 
@@ -282,7 +268,7 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
 
 
 //če je še vedno dovoljeno potem...
-    if ($allow == true and $allow_onjob == true) {
+   // if ($allow == true and $allow_onjob == true) {
 
         //dejansko vnesemo
         $data = array(
@@ -292,9 +278,10 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
             'start' => $emp_start_time,
             'end' => $emp_stop_time,
             'location_id' => $wlocation_drop,
-            'comm' => $noteemploy,
+            'comm' => $noteemploy.' napake so:'. $message,
         );
-        $db->insert('work_log', $data);
+       
+        $db->insert('feedback_work_log', $data);
         $allow = false;
         $allow_onjob = false;
         //$message .= "Vnos je dodan";
@@ -303,9 +290,9 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
       //  exit;
 
          $messagetype = "success";
-        $message .= ' Vnos je dodan!<br />';
+        $message .= ' Prošnja je oddana!<br />';
 
-    }
+  //  }
 }
 $tem = str_replace("##WADAY##", $emp_day_dropdown, $tem);
 $tem = str_replace("##WAMONTH##", $emp_month_dropdown, $tem);
@@ -318,7 +305,7 @@ $tem = str_replace('##WSTOPTIMEMIN##', $empmin_stop_time_dropdown, $tem);
 $tem = str_replace("##WLOCATION_DROP##", $wlocation_dropdown, $tem);
 $tem = str_replace("##WJOB_DROP##", $emp_work_dropdown, $tem);
 $tem = str_replace("##WNAME_DROP##", $emp_ass_name_dropdown, $tem);
-$tem = str_replace("##WMESSAGE##", $wmessage, $tem);
+//$tem = str_replace("##WMESSAGE##", $wmessage, $tem);
 ////////////////
 /////////////////
 /////////////////$emp_ass_name_dropdown
@@ -436,8 +423,8 @@ if ($_REQUEST['add'] == "    Shrani    ") {
     }
     //če pa je "samo" vodja pa ne more vpisovati dni in ocenjevalca
     else {
-        $start_time = mktime($hour_start_time_drop, $min_start_time_drop, 0, date("n", time()), date("j", time()), $year = date("Y", time()));
-        $stop_time = mktime($hour_stop_time_drop, $min_stop_time_drop, 0, date("n", time()), date("j", time()), $year = date("Y", time()));
+        $start_time = mktime($hour_start_time_drop, $min_start_time_drop, 0, $month_drop, $day_drop, $year_drop);
+        $stop_time = mktime($hour_stop_time_drop, $min_stop_time_drop, 0, $month_drop, $day_drop, $year_drop);
         $pause_time = $pause_hour_time_drop * 3600 + $pause_min_time_drop * 60;
         $ass_name_drop = $user_id;
     }
@@ -536,7 +523,7 @@ if ($_REQUEST['add'] == "    Shrani    ") {
 
 
 //če je še vedno dovoljeno potem...
-    if ($allow == true and $allow_onjob == true) {
+    //if ($allow == true and $allow_onjob == true) {
 
         //dejansko vnesemo
         $data = array(
@@ -547,165 +534,29 @@ if ($_REQUEST['add'] == "    Shrani    ") {
             'end' => $stop_time,
             'pause' => $pause_time,
             'assessment' => $rating_drop, //$assessment,
-            'comm' => $note,
-            'testing' => $identity
+            'comm' => $note." napake pri vnosu so bile:".$message,
+            'testing' => $identity,
+            'status' =>0
         );
-        $db->insert('work_log', $data);
+        $db->insert('feedback_work_log', $data);
 
 
        
         //header("location:".$_SERVER['HTTP_REFERER']);
         // header("location:aktivnosti.php" . $param);
         $messagetype = "success";
-        $message .= ' Vnos je dodan!<br />';
+        if ($message) {$obvestilo='Napake bomo preverili.';}
+        else {$obvestilo="";}
+        $message .= ' Vloga za vpis je oddana.<br />'.$obvestilo.'<br />';
 
 
         // exit;
-    }
-}
-
-
-//////////////
-///////////Izpis zadnjih x vpisov - za admina izpiše ne glede na datum
-$tmp = template_get_repeat_text("##DSTART_LOG##", "##DSTOP_LOG##", "##DLOGS##", $tem);
-
-$row = $tmp[1];
-$tem = $tmp[0];
-
-//spremenljivki za mesec ine leto
-
-
-if (!$mon) {
-    $mon = date("m", time());}
-
-if ($mon < 1 or $mon > 12)
-    $mon = ''; 
-
-if (!$year)
-    $year = date("Y", time());
-
-$day = date("j", time());
-
-
-
-
-//pogoj, da lahko vsi ki imajo nad 80 role_id vidijo vse in dopisujejo vse
-if ($role_id < $ROLE_LEADER) {
-    $dsql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and ((`assessor_id`>0 and
-`assessor_id`=$person_id)or(assessor_id=0 and
-work_log.`person_id`=$person_id)) and date(from_unixtime(end))=concat($year,'-',$mon,'-',$day) /* month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year and day(from_unixtime('end'))=$day */  order by log_id desc limit 0,3";
-}
-
-elseif  
-    ($role_id < $ROLE_ADMIN and $role_id >= $ROLE_LEADER) {
-    //$dsql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and `assessor_id`>0 and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year order by datum desc, priim_varov, ime_varov, zacetek";
-    $dsql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and date(from_unixtime(end))=concat($year,'-',$mon,'-',$day) /* month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year */ order by log_id desc limit 0,3";
-} else {
-    $dsql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id`,`work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` /*and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year */ order by log_id desc limit 0,3";
-}
-
-
-$dresult = $db->fetchAll($dsql);
-
-
-foreach ($dresult as $dres) {
-    $table = $row;
-    $table = str_replace("##DID##", $dres["log_id"], $table);
-    $table = str_replace("##DUSERS##", $dres["priim_varov"] . " " . $dres["ime_varov"], $table);
-    $table = str_replace("##DDAY##", $dres["datum"], $table);
-    $table = str_replace("##DSTART##", $dres["zacetek"], $table);
-    $table = str_replace("##DSTOP##", $dres["konec"], $table);
-    $table = str_replace("##DNAME##", $dres["name"], $table);
-    $table = str_replace("##DDESCRIPTION##", $dres["comm"], $table);
-    $dwhole_table.=$table;
-}
-$tem = str_replace("##DLOGS##", $dwhole_table, $tem);
-$tem = str_replace("##DMESSAGE##", $message, $tem);
-
-
-///////////////Konec pregle x vpisov
-/////////////////
-////////////////
-///////////Izpis vpisov trenutnega dne/za admina zadnjih 40 urejenih po abecedi
-$tmp = template_get_repeat_text("##START_LOG##", "##STOP_LOG##", "##LOGS##", $tem);
-
-$row = $tmp[1];
-$tem = $tmp[0];
-
-//spremenljivki za mesec ine leto
-if ($mon < 1 or $mon > 12)
-    $mon = '';
-
-if (!$mon)
-    $mon = date("m", time());
-
-if (!$year)
-    $year = date("Y", time());
-
-$day = date("j", time());
-
-
-
-//
-//pogoj, da lahko vsi ki imajo nad 80 role_id vidijo vse in dopisujejo vse
-if ($role_id < $ROLE_LEADER) {
-    $sql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and ((`assessor_id`>0 and
-`assessor_id`=$person_id)or(assessor_id=0 and
-work_log.`person_id`=$person_id)) and date(from_unixtime(end))=concat($year,'-',$mon,'-',$day) /* month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year and day(from_unixtime('end'))=$day */  order by letter limit 0,30";
-} elseif ($role_id < $ROLE_ADMIN and $role_id >= $ROLE_LEADER) {
-    //$sql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and `assessor_id`>0 and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year order by datum desc, priim_varov, ime_varov, zacetek";
-    $sql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id` , `work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` and `unit`=$unit and date(from_unixtime(end))=concat($year,'-',$mon,'-',$day) /* month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year */ order by letter";
-} else {
-    $sql = "SELECT id as log_id, date_format(from_unixtime(`end`),'%d.%m.%Y') datum,`persons`.`first` ime_varov,`persons`.`last` priim_varov,`work`.`name`,time(from_unixtime(`start`)) zacetek, time(from_unixtime(`end`)) konec, `work_log`.`assessor_id`,`work_log`.`comm` from `work_log`,`work`,`persons` where `work`.`work_id`=`work_log`.`work_id` and `persons`.`id_person`=`work_log`.`person_id` /* and month(from_unixtime(`end`))=$mon and year(from_unixtime(`end`))=$year*/ order by letter asc  limit 0,40";
+    //}
 }
 
 
 
-//////////////////////
-//"SELECT id as log_id,
-//                       date_format(from_unixtime(`end`),'%d.%m.%Y') datum,
-//                       `persons`.`first` ime_varov,
-//                       `persons`.`last` priim_varov,
-//                       `work`.`name`,
-//                       time(from_unixtime(`start`)) zacetek,
-//                       time(from_unixtime(`end`)) konec,
-//                       `work_log`.`assessor_id` ,
-//                       `work_log`.`comm`
-//               FROM `work_log`,
-//                    `work`,
-//                    `persons`
-//               WHERE `work`.`work_id`=`work_log`.`work_id` and
-//                     `persons`.`id_person`=`work_log`.`person_id` and
-//                     ((`assessor_id`>0 and`
-//                           assessor_id`=$person_id)or
-//                        (assessor_id=0 and
-//                           work_log.`person_id`=$person_id)) and
-//                     month(from_unixtime(`end`))=$mon and
-//                     year(from_unixtime(`end`))=$year
-//              ORDER BY log_id desc
-//              LIMIT 0,30";
-////////////////////
 
-
-
-
-$result = $db->fetchAll($sql);
-
-
-foreach ($result as $res) {
-    $table = $row;
-    $table = str_replace("##LID##", $res["log_id"], $table);
-    $table = str_replace("##LUSERS##", $res["priim_varov"] . " " . $res["ime_varov"], $table);
-    $table = str_replace("##LDAY##", $res["datum"], $table);
-    $table = str_replace("##LSTART##", $res["zacetek"], $table);
-    $table = str_replace("##LSTOP##", $res["konec"], $table);
-    $table = str_replace("##LNAME##", $res["name"], $table);
-    $table = str_replace("##LDESCRIPTION##", $res["comm"], $table);
-    $whole_table.=$table;
-}
-
-$tem = str_replace("##LOGS##", $whole_table, $tem);
-$tem = str_replace("##MESSAGE##", $message, $tem);
 
 ///////////////Konec Izpis vpisov trenutnega dne urejenih po abecedi
 

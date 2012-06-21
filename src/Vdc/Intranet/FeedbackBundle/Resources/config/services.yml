@@ -1,0 +1,7 @@
+parameters:
+#    feedback.example.class: Vdc\Intranet\FeedbackBundle\Example
+
+services:
+#    feedback.example:
+#        class: %feedback.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

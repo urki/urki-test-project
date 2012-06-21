@@ -1,0 +1,7 @@
+FeedbackBundle_feedback:
+        resource: "@FeedbackBundle/Resources/config/routing/feedback.yml"
+        prefix:   /feedback
+        
+FeedbackBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: FeedbackBundle:Default:index }

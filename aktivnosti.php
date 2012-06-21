@@ -178,9 +178,9 @@ if ($_REQUEST['addemploy'] == "   Shrani   ") {
     }
     //če pa je "samo" vodja pa ne more vpisovati dni in ocenjevalca
     else {
-        $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
-        $emp_stop_time = mktime($emp_hour_stop_time_drop, $emp_min_stop_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
-        $emp_ass_name_drop = $person_id;
+             $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, date("n", time()), date("j", time()), $year = date("Y", time()));		        $emp_start_time = mktime($hour_start_time_drop, $emp_min_start_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
+	        $emp_stop_time = mktime($emp_hour_stop_time_drop, $emp_min_stop_time_drop, 0, date("n", time()), date("j", time()), $year = date("Y", time()));		        $emp_stop_time = mktime($emp_hour_stop_time_drop, $emp_min_stop_time_drop, 0, $emp_month_drop, $emp_day_drop, $emp_year_drop);
+	        $emp_ass_name_drop = $person_id;
     }
 
 

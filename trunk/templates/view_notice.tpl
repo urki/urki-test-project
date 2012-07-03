@@ -23,7 +23,7 @@
                         <table>
                             <tr>
                                 <td>
-
+                                    Ob kliku na <b><i> Obvestila, V čakanju, Končana</i></b> se pogled na ta sklop razširi in se tako vidijo obstoječi zapisi.
                                 </td>
                             </tr>
                         </table>

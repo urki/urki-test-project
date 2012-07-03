@@ -14,9 +14,9 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>VDC saša - ##TITLE##</title>
 			<script language="JavaScript1.1" src="img/moo.js" type="text/javascript"></script>
-			
 			<script type="text/javascript" src="img/vdcsasa.js"></script> 
 		
+                        <script type="text/javascript" src="inc/js/custom.js"> </script>
 
 
         <script type="text/javascript">

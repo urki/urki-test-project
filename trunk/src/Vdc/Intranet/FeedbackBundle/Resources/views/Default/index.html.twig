@@ -1,22 +1,3 @@
 Hello {{ stevilo }}! {{ prazen }}
 
 
-<table>
-
-
-
-    {% for 1..4 %}
-        <tr>
-            {% for day in week %}
-                <td>
-                    {% if month.contains(day) %}
-                        {{ day.begin.format('d') }}
-                    {% else %}
-                        &nbsp;
-                    {% endif %}
-                </td>
-            {% endfor %>
-        </tr>
-    {% endfor %}
-
-</table>

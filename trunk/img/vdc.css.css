@@ -9,12 +9,18 @@
 /* 
    TODO customize this sample style
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+zamenjal   #6B7B95   z   #f91010  
+
 */
 
+#footer{width:1200px;left:20%;}
+#rightheadertop{position:absolute;right:30px;}
+#lefttheadertop{position:absolute;left:30px;}
 #accordion  {
   margin: 20px 0 0;
-  max-width: 400px;
+  max-width: 600px;
 }
+
   #accordion H2 {
     background: #6B7B95;
     color: white;
@@ -27,10 +33,27 @@
   #accordion .content {
     background-color: #F4F5F5;
   }
-  #accordion .content p {
+  
+   #accordion .content p {
     margin: 0.5em 0;
     padding: 0 6px 8px 6px;
   }
+   
+  #drophead  {
+  margin: 20px 0 0;
+  max-width: 300px;
+}
+
+  #drophead h3 {
+   
+    color: black;
+    cursor: pointer;
+    font: 12px Helvetica, Arial, sans-serif;
+    line-height: 16px;
+  }
+  
+  
+  
   
   
 textarea {

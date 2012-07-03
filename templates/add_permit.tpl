@@ -39,54 +39,54 @@
                         </td>
                     </tr>
 
-                    
-                    
-                    
 
-                    
-                    
-                    
-                    
-                  
-                        <div class="content">
-                            <tr>
-                                <td>
 
-                                    Čas konca:
-                                </td>
-                                <td>
-                                    ##EHOUR## : ##EMIN##
-                                </td>
-                            </tr>
-                       
-                    
-                    
-                    
-                    <tr>
-                        <td>
-                            Tip:
-                        </td>
-                        <td>
-                            ##JOB_DROP##
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Opomba:
-                        </td>
-                        <td>
-                            <textarea name="note" id="note" cols="60" rows="10"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input name="add" id="add" value="    Dodaj    " type="submit">
-                        </td>
-                        <td>
-                            <input type=button onClick="location.href='add_permit.php'" value='Izbriši vse'>
-                        </td>
 
-                    </tr>
+
+
+
+
+
+
+                    <div class="content">
+                        <tr>
+                            <td>
+
+                                Čas konca:
+                            </td>
+                            <td>
+                                ##EHOUR## : ##EMIN##
+                            </td>
+                        </tr>
+
+
+
+
+                        <tr>
+                            <td>
+                                Tip:
+                            </td>
+                            <td>
+                                ##JOB_DROP##
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Opomba:
+                            </td>
+                            <td>
+                                <textarea name="note" id="note" cols="60" rows="10"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input name="add" id="add" value="    Dodaj    " type="submit">
+                            </td>
+                            <td>
+                                <input type=button onClick="location.href='add_permit.php'" value='Izbriši vse'>
+                            </td>
+
+                        </tr>
 
 
 
@@ -98,7 +98,7 @@
     </div>
 </form>
 <script type="text/javascript">
-document.addlog.name_drop.focus();
+    document.addlog.name_drop.focus();
 </script>
 
 <div class="span-6 last" >

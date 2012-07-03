@@ -53,9 +53,9 @@ document.editform3.submit();
         <div id="header-wrap">
 			 <div class="span-24 last" id="maintopheader">
                 <div class="span-19" id="leftheadertop">
-                    <a href="view_notice.php"><b>Glavna stran</b></a>
+                    <a href="view_notice.php"><b>    Glavna stran</b></a>
                 </div>
-                <div class="span-5 last" id="rightheadertop">
+                <div  id="rightheadertop">
                     ##IF_USER##<b>živijo ##USER####IF_USER## |</b>
                     <a href="logout.php" class=""><b>Odjava</b></a> |
                     <a href="help_main.php" class=""><b>Pomoč</b></a>

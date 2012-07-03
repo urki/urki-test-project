@@ -51,6 +51,13 @@ class DAL {
         return $this->query($sql);
          
          */
+    
+    /**
+     * workin_time query
+     * 
+     * @param type $status
+     * @return type 
+     */
     public function get_data_group_from_workingTime_status_workingTime_persons_by_status($status) {
            if (isset($status)){
                $status='status='.$status;
@@ -66,6 +73,38 @@ class DAL {
              WHERE m2.id IS NULL $status
              ";
         return $this->query($sql);
+    }
+    
+    /**
+     * workin_time query with number of records, status and person)
+     * @param string $status
+     * @param type $person
+     * @param type $number
+     * @return type 
+     */
+    
+    public function get_data_lastX_inserts_by_status_person($status, $person_id, $number=3){
+        if (isset($status)){
+               $status='status='.$status;
+           }else $status="status='v teku'";
+           
+           if (isset($person_id) ){
+               $person_id='and person_id='.$person_id;
+           }else $person_id='';
+           
+          $sql="SELECT id, timestamp, persons.first, persons.last,  valid_from, valid_to, minStart, maxEnd, jobtype.name 
+                FROM ( `working_time` 
+                        left join
+                           jobtype on working_time.`jobtype_id`=jobtype.`job_id`)
+                      left join persons on persons.id_person=working_time.`person_id`
+                WHERE 
+               $status
+               $person_id
+               order by id desc limit 0,$number";
+         // var_dump($sql); die:
+          return $this->query($sql);
+                   
+           
     }
     
     

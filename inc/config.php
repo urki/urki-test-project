@@ -14,8 +14,9 @@ require_once 'string.php';
 require_once(__DIR__.'/class/DAL.php');
 require_once(__DIR__.'/class/myClasses.php');
   
+$time= new myClasses();
+$dal=new DAL();
 
-    $dal=new DAL();
 
    // require_once 'local.php';
 $db = Zend_Db::factory('Mysqli', array(

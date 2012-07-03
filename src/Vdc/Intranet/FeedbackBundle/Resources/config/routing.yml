@@ -5,3 +5,7 @@ FeedbackBundle_feedback:
 FeedbackBundle_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: FeedbackBundle:Default:index }
+    
+FeedbackBundle_test:
+    pattern:   /test
+    defaults: { _controller: FeedbackBundle:Default:test }

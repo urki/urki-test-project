@@ -5,68 +5,79 @@
 
 
 
-    <div class="span-16" id="addlogadmin">
+    <div class="span-24" id="addlogadmin">
 
 
         <div class="span-16">
 
             <fieldset class="shadowcontainer">
 
-                <div class="span-1 last">
-                    <b>Obvestila:</b>  
+                <!--   <div class="span-1 last">
+                -->
+
+                <div id="accordion">
+
+                    <h2>Obvestila</h2>
+
+                    <div class="content">
+                        <table>
+                            <tr>
+                                <td>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <h2>V čakanju</h2>
+
+                    <div class="content">
+                        ##START_LOG##
+                        <table>
+                            <tr>
+                                <td>
+                                    ##FEEDBNOTE## <hr/>
+                                </td>
+                            </tr>
+                        </table>
+                        ##STOP_LOG##
+                        <p></p>
+                    </div>
+
+                    <h2>Končana</h2>
+
+                    <div class="content">
+                        ##START END##
+                        <table>
+                            <tr>
+                                <td>
+                                    ##FEEDBNOTE DONE## <hr/>
+                                </td>
+                            </tr>
+                        </table>
+                        ##STOP_END##
+
+
+
+                    </div>
+
                 </div>
-
-                <table>
-                    <tr>
-                        <td>
-
-                        </td>
-                    </tr>
-                </table>
-
-
-                <div class="push-0">
-                    <b>V čakanju:</b> 
-                </div>
-                ##START_LOG##
-                <table>
-                    <tr>
-                        <td>
-                            ##FEEDBNOTE##
-                        </td>
-                    </tr>
-                </table>
-                ##STOP_LOG##
-                <div class="push-0">
-                    <b>Končano:</b> 
-                </div>
-##START END##
-                <table>
-                    <tr>
-                        <td>
-                            ##FEEDBNOTE DONE##
-                        </td>
-                    </tr>
-                </table>
-##STOP_END##
-
-
-             
-
 
             </fieldset>
+            <!--  </div> -->
+
+
+
         </div>
-
-
-    </div>
 </form>
 <script type="text/javascript">
     document.addlog.name_drop.focus();
 </script>
 
-<div class="span-7 last" >
+<div class="span-6 last" >
     <fieldset  class="shadowcontainer">
-        <div class="push-5 last"><a href="view_user_log.php">Več...</a>
+        <div class="push-4 last"><a href="view_user_log.php">Več...</a>
         </div>
 
         <div>
@@ -145,12 +156,6 @@
 
             </table>
         </div>
-
-
-
-
-
-
 
     </fieldset>
 </div>

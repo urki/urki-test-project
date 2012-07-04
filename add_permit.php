@@ -59,55 +59,34 @@ if ($role_id) {
     $tem = template_clean_up_tags($tem, "##IF_LEADER##", 1);
     $tem = template_clean_up_tags($tem, "##IF_EMPLOYED##", 1);
 }
-
-
-
 $year_drop = date("Y");
 
-
-$qyear = range((date("Y", time())) - 1, (date("Y", time())) + 1);
-$qyear_dropdown = html_drop_down_arrays("year_drop", $qyear, $qyear, $year_drop);
-
-$qmonth = range(1, 12);
-$qmonth_dropdown = html_drop_down_arrays("month_drop", $qmonth, $qmonth, $month_drop);
-
-$qday = range(1, 31);
-$qday_dropdown = html_drop_down_arrays("day_drop", $qday, $qday, $day_drop);
-
 $fyear = range((date("Y", time())) - 1, (date("Y", time())) + 1);
-$from_year_dropdown = html_drop_down_arrays("fyear_drop", $fyear, $fyear, $year_drop);
-
+$fyear_dropdown = html_drop_down_arrays("fyear_drop", $fyear, $fyear, date("Y", time())); //$year_drop);
 $fmonth = range(1, 12);
-$from_month_dropdown = html_drop_down_arrays("fmonth_drop", $fmonth, $fmonth, $fmonth_drop);
-
+$fmonth_dropdown = html_drop_down_arrays("fmonth_drop", $fmonth, $fmonth, date("m", time())); //$fmonth_drop);
 $fday = range(1, 31);
-$from_day_dropdown = html_drop_down_arrays("fday_drop", $fday, $fday, $fday_drop);
+$fday_dropdown = html_drop_down_arrays("fday_drop", $fday, $fday, date("d", time())); // $fday_drop);
+$fhour = range(0, 23);
+$fhour_dropdown = html_drop_down_arrays("fhour_drop", $fhour, $fhour, $fhour_drop);
+$fmin = range(0, 59);
+$fmin_dropdown = html_drop_down_arrays("fmin_drop", $fmin, $fmin, $fmin_drop);
 
-
-
+$syear = range((date("Y", time())) - 1, (date("Y", time())) + 1);
+$syear_dropdown = html_drop_down_arrays("syear_drop", $syear, $syear, date("Y", time())); //$fyear_drop);
+$smonth = range(1, 12);
+$smonth_dropdown = html_drop_down_arrays("smonth_drop", $smonth, $smonth, date("m", time())); //$fmonth_drop);
+$sday = range(1, 31);
+$sday_dropdown = html_drop_down_arrays("sday_drop", $sday, $sday, date("d", time())); //$fday_drop);
 $shour = range(0, 23);
 $shour_dropdown = html_drop_down_arrays("shour_drop", $shour, $shour, $shour_drop);
-
 $smin = range(0, 59);
 $smin_dropdown = html_drop_down_arrays("smin_drop", $smin, $smin, $smin_drop);
-
-$ehour = range(0, 23);
-$ehour_dropdown = html_drop_down_arrays("ehour_drop", $ehour, $ehour, $ehour_drop);
-
-
-$emin = range(0, 59);
-$emin_dropdown = html_drop_down_arrays("emin_drop", $emin, $emin, $emin_drop);
-
-
-
-
 
 //pogoj, da se vpiše sam če ima role id <70
 if ($role_id < 70) {
     $name_drop = $person_id;
 }
-
-
 //pogoj, da lahko vsi ki imajo nad 80 role_id vidijo vse in dopisujejo vse
 if ($role_id < 80) {
     $sql = "SELECT * FROM persons where unit=$role_id and id_role>30 order by last ASC";
@@ -125,7 +104,6 @@ foreach ($result as $res) {
 }
 
 $name_dropdown = html_drop_down_arrays("name_drop", $names, $values, $name_drop);
-
 
 //pogoj, da lahko vsi ki imajo nad 80 role_id vpisujejo vse JOBTYPE, ostali pa ne
 //if ($role_id<80){
@@ -152,12 +130,20 @@ $job_dropdown = html_drop_down_arrays("job_drop", $names_job, $values_job, $job_
 $name = $_REQUEST['name'];
 
 if ($_REQUEST['add'] == "    Dodaj    ") {
+    if ($submit==0){
+        $stop_time=$checkTimeIfUntouched;
+    }
     if (!$name_drop) {
         $messagetype = "notice";
         $message.= "Izberi ime in priimek!";
     } else {
-        $start_time = mktime($shour_drop, $smin_drop, 0, $month_drop, $day_drop, $year_drop);
-        $stop_time = mktime($ehour_drop, $emin_drop, 0, $month_drop, $day_drop, $year_drop);
+        $start_time = mktime($fhour_drop, $fmin_drop, 0, $fmonth_drop, $fday_drop, $fyear_drop);
+        $stop_time = mktime($shour_drop, $smin_drop, 0, $smonth_drop, $sday_drop, $syear_drop);
+        $checkTimeIfUntouched = mktime($shour_drop, $smin_drop, 0, date("n", time()), date("j", time()), date("Y", time()));
+        if ($checkTimeIfUntouched==$stop_time) {
+            $stop_time = mktime($shour_drop, $smin_drop, 0, $fmonth_drop, $fday_drop, $fyear_drop );
+            }
+          
         $diffUnixTime = $stop_time - $start_time;
         if ($diffUnixTime > 86400) {
             $messagetype = "notice";
@@ -165,18 +151,35 @@ if ($_REQUEST['add'] == "    Dodaj    ") {
             $submit = false;
             ////exit;
         }
-        $date = $year_drop . '-' . $month_drop . '-' . $day_drop;
-        $DayOfWeek = date("w", mktime(0, 0, 0, $month_drop, $day_drop, $year_drop));
+        $date = $fyear_drop . '-' . $fmonth_drop . '-' . $fday_drop;
+        $DayOfWeek = date("w", mktime(0, 0, 0, $fmonth_drop, $fday_drop, $fyear_drop));
         $todaySubMonth = time() - 2592000;
         $todayAddMonth = time() + 2592000;
 
+        $today=time();
+        echo "startTime: $start_time <br/>";
+          echo "stopTime: $stop_time <br>";
+          echo "CheckTime: $checkTimeIfUntouched<br>";
+          echo "today: $today <br>";
+          echo "submit: $submit <hr>";
+        
+          echo 'startTime:'. date("y-m-d G:i:s", $start_time).'<br>';
+          echo 'stopTime:'. date("y-m-d G:i:s",  $stop_time) .'<br>';
+          echo 'CheckTime:'. date("y-m-d G:i:s",  $checkTimeIfUntouched).'<br>';
+          echo 'today: '. date("y-m-d G:i:s", $today).'<br>';
+          echo "submit: $submit <hr>";
+        
 //preveri ce je v month reportu ze izpisan in ce je ga ne dovoli vpisat
-        if ($month_drop < 10) {
-            $mesec = "0" . $month_drop;
+        if ($fmonth_drop < 10) {
+            $mesec = "0" . $fmonth_drop;
         } else {
-            $mesec = $month_drop;
+            $mesec = $fmonth_drop;
         };
-        if (!$month_drop) {
+        if (!$job_drop) {
+            $messagetype = "notice";
+            $message.= "Manjka tip vloge";
+            $submit = 0;
+        } elseif (!$fmonth_drop or !$fday_drop) {
             $messagetype = "notice";
             $message.= "Manjka datum";
             $submit = 0;
@@ -203,17 +206,9 @@ if ($_REQUEST['add'] == "    Dodaj    ") {
             $messagetype = "notice";
             $message.= "Manjka tip vloge";
             $submit = 0;
-        } elseif (!$job_drop) {
-            $messagetype = "notice";
-            $message.= "Manjka tip vloge";
-            $submit = 0;
         }
 
-
-
-
-
-        if ($submit <> 0 and ($job_drop and $month_drop and $day_drop and $start_time and $stop_time and ($start_time < $stop_time))) {
+        if ($submit <> 0 ) {
             $sql = "SELECT timestamp FROM working_time  
                          where jobtype_id=$job_drop 
                           and person_id = '$name_drop'  
@@ -256,36 +251,23 @@ if ($_REQUEST['add'] == "    Dodaj    ") {
                     'timestamp' => $now,
                     'person_id' => $name_drop, //name_drop sem zamenjal z user_id saj se avtomatsko…
                     'jobtype_id' => $job_drop,
-                    'valid_from' => $year_drop . '-' . $month_drop . '-' . $day_drop,
-                    'valid_to' => $year_drop . '-' . $month_drop . '-' . $day_drop,
-                    'minStart' => $shour_drop . ':' . $smin_drop . ':00',
-                    'maxEnd' => $ehour_drop . ':' . $emin_drop . ':00',
+                    'valid_from' => $fyear_drop . '-' . $fmonth_drop . '-' . $fday_drop,
+                    'valid_to' => $syear_drop . '-' . $smonth_drop . '-' . $sday_drop,
+                    'minStart' => $fhour_drop . ':' . $fmin_drop . ':00',
+                    'maxEnd' => $shour_drop . ':' . $smin_drop . ':00',
                     'DayOfWeek' => $weekday,
                     'EvenOrOddWeek' => 'all',
                     'maxJobTime' => $maxJobTime,
                     'workingTime' => $workingTime,
                     'note' => $note . " " . "//dodal" . " " . $identity
                 );
+             
                 $db->insert('working_time', $data);
                 $lastInsertedId = $db->lastInsertId();
 
                 $messagetype = "success";
                 $message .= "Vloga številka $lastInsertedId je oddana";
 
-
-                //vpis v status entiteto:
-                /*
-                  $stime = $shour_drop . ':' . $smin_drop . ':00';
-                  $etime = $ehour_drop . ':' . $emin_drop . ':00';
-
-                  $sql = "SELECT *
-
-                  FROM  `working_time`
-                  WHERE timestamp='$now' and `person_id` =$name_drop  and jobtype_id='$job_drop'
-                  ORDER BY id DESC
-                  LIMIT 0 , 1";
-                 * 
-                 */
                 $sql = "SELECT * FROM working_time
                           WHERE id=$lastInsertedId";
 
@@ -311,92 +293,44 @@ if ($_REQUEST['add'] == "    Dodaj    ") {
 }
 
 //Izpis zadnjih 3 vnosov:
-
-
 //za izpisovanje vnosov
 $tmp = template_get_repeat_text("##START_LOG##", "##STOP_LOG##", "##LOGS##", $tem);
 $row = $tmp[1];
 $tem = $tmp[0];
 
-if ($role_id>=70){
+if ($role_id >= 70) {
     $enota = $dal->get_data_lastX_inserts_by_status_person();
     //print_r($enota[2]); 
-}
-else {
-    ($enota = $dal->get_data_lastX_inserts_by_status_person($status, $person_id, 3));
-    }
-   
-   // id 	timestamp	first	last	valid_from	valid_to	minStart	maxEnd	name
-    for ($x = 0; $x < count($enota); $x++) {
-        
-    //for ($x = count($enota); $x >= 0; $x--) {   
-      $table.=$row;
-      $table = str_replace("##RECORDID##", $enota[$x][id], $table);
-      $table = str_replace("##TYPENAME##", $enota[$x][name], $table);//substr($res["note"], 0, 120) . '...', $table);
-      $table = str_replace("##VALID##", $enota[$x][valid_from], $table);
-      $table = str_replace("##MINSTART##", $enota[$x][minStart], $table);
-      $table = str_replace("##MAXEND##", $enota[$x][maxEnd], $table);
-      $table = str_replace("##NAME##", $enota[$x][last].' '.$enota[$x][first], $table);
-        
-    } 
-        
-   /*
-    * 
-    
-    echo $enota[$x][id];
-      echo"<hr/>";
-}
-   
-    die;
-    print_r($enota);
-    die;
-
-
-foreach ($record as $unit_in) {
-
-    $table.=$row;
-    $enota = $dal->get_data_lastX_inserts_by_status_person();
-    
-    $enota = $enota[0];
-    echo "enota=$enota";
-    $table = str_replace("##RECORDID##", $res[id], $table);
-     }
-
-
-/*
-$sql = $dal->get_data_lastX_inserts_by_status_person();
-
-
-
-
-if ($sql) {
-    foreach ($sql as $res) {
-    $table.=$row;
-    $table = str_replace("##RECORDID##", $res[id], $table);
-    $table = str_replace("##TYPENAME##", $res[name], $table);//substr($res["note"], 0, 120) . '...', $table);
-
-    }
-    
 } else {
-    //$messagetype = "error";
-    $messageRight .='ni nobenega vnosa';
- 
-
+    ($enota = $dal->get_data_lastX_inserts_by_status_person($status, $person_id, 3));
 }
- */
+
+// id 	timestamp	first	last	valid_from	valid_to	minStart	maxEnd	name
+for ($x = 0; $x < count($enota); $x++) {
+
+    //for ($x = count($enota); $x >= 0; $x--) {   
+    $table.=$row;
+    $table = str_replace("##RECORDID##", $enota[$x][id], $table);
+    $table = str_replace("##TYPENAME##", $enota[$x][name], $table); //substr($res["note"], 0, 120) . '...', $table);
+    $table = str_replace("##VALID##", $enota[$x][valid_from], $table);
+    $table = str_replace("##MINSTART##", $enota[$x][minStart], $table);
+    $table = str_replace("##MAXEND##", $enota[$x][maxEnd], $table);
+    $table = str_replace("##NAME##", $enota[$x][last] . ' ' . $enota[$x][first], $table);
+}
+
 
 $tem = str_replace("##LOGS##", $table, $tem);
 $tem = str_replace('##MESSAGETYPE##', $messagetype, $tem);
 $tem = str_replace('##SHOUR##', $shour_dropdown, $tem);
 $tem = str_replace('##SMIN##', $smin_dropdown, $tem);
-$tem = str_replace('##EHOUR##', $ehour_dropdown, $tem);
-$tem = str_replace('##EMIN##', $emin_dropdown, $tem);
-$tem = str_replace('##DAYTO##', $qday_dropdown, $tem);
-$tem = str_replace('##MONTHTO##', $qmonth_dropdown, $tem);
-$tem = str_replace('##YEARTO##', $qyear_dropdown, $tem);
-$tem = str_replace('##DAYFROM##', $from_day_dropdown, $tem);
-$tem = str_replace('##MONTHFROM##', $from_month_dropdown, $tem);
-$tem = str_replace('##YEARFROM##', $from_year_dropdown, $tem);
+$tem = str_replace('##SDAY##', $sday_dropdown, $tem);
+$tem = str_replace('##SMONTH##', $smonth_dropdown, $tem);
+$tem = str_replace('##SYEAR##', $syear_dropdown, $tem);
+$tem = str_replace('##FHOUR##', $fhour_dropdown, $tem);
+$tem = str_replace('##FMIN##', $fmin_dropdown, $tem);
+$tem = str_replace('##FDAY##', $fday_dropdown, $tem);
+$tem = str_replace('##FMONTH##', $fmonth_dropdown, $tem);
+$tem = str_replace('##FYEAR##', $fyear_dropdown, $tem);
 $tem = str_replace('##TITLE##', $TITLE, $tem);
 $tem = str_replace('##USER##', $identity, $tem);
 $tem = str_replace("##JOB_DROP##", $job_dropdown, $tem);

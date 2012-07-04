@@ -13,8 +13,17 @@
                             <td>
                                 Ime, priimek:
                             </td>
+                            
                             <td>
                                 ##NAME_DROP##
+                            </td>
+                        </tr>
+                          <tr>
+                            <td>
+                                Tip:
+                            </td>
+                            <td>
+                                ##JOB_DROP##
                             </td>
                         </tr>
                         ##IF_LEADER##          
@@ -24,7 +33,7 @@
                             </td>
                             <td>
                                 <div id="drophead">
-                                    <h3>##DAYTO## / ##MONTHTO## / ##YEARTO##</h3>
+                                    <h3>##FDAY## / ##FMONTH## / ##FYEAR##</h3>
                                     <div class="dropcontent">
                                     </div>
                                     <h3>Več...</h3>
@@ -32,9 +41,21 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    Sem pa vpišeš nekaj skrivnega
-                                                     ##DAYTO## / ##MONTHTO## / ##YEARTO##
+                                                    tu se skriva hudicek; Izberi si kdaj ga želiš videti
+
+
                                                 </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>    
+                                                    ##SDAY## / ##SMONTH## / ##SYEAR## 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="year_only" > tudi sobota, nedelja ali praznik
+                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -47,7 +68,7 @@
                                 Čas začetka:
                             </td>
                             <td>
-                                ##SHOUR## : ##SMIN##
+                                ##FHOUR## : ##FMIN##
                             </td>
                         </tr>
                         <tr>
@@ -55,15 +76,7 @@
                                 Čas konca:
                             </td>
                             <td>
-                                ##EHOUR## : ##EMIN##
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Tip:
-                            </td>
-                            <td>
-                                ##JOB_DROP##
+                                ##SHOUR## : ##SMIN##
                             </td>
                         </tr>
                         <tr>
